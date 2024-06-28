@@ -6,10 +6,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/png" href="./assets/visual/icon.png">
     <title>Tweetie Bird</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="script.js" defer></script>
+    <link rel="stylesheet" href="game.css">
+    <script src="game.js" defer></script>
 </head>
 <body>
-    
+    <div class="background">
+        <img src="./assets/visual/bird.png" alt="Tweetie Bird" class="bird" id="normal-bird"/>
+        <div class="start-message">
+            Press Enter To Start
+            <br/>
+            <br/>
+            Use Space To Jump
+        </div>
+        <div class="score">
+            <span class="score_message">Score: </span>
+            <span class="score_value"></span>
+        </div>
+    </div>
 </body>
 </html>
