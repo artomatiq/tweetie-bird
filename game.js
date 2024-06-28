@@ -1,11 +1,21 @@
+const scoreBox = document.querySelector('.score');
 const score = document.querySelector('.score-value');
 const bird = document.querySelector('.bird');
 const startMessage = document.querySelector('.start-message');
 
-const gameState = 'start';
+let gameState = 'start';
 
-gameState === 'start' 
-    ? bird.style.display = 'none'
-    : startMessage.style.display = 'block'
+bird.style.display = 'none';
+scoreBox.style.display = 'none';
 
+
+
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+        gameState = 'play';
+        startMessage.style.display = 'none';
+        bird.style.display = 'block';
+        scoreBox.style.display = 'block';
+    }
+});
 
