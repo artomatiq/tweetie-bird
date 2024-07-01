@@ -77,3 +77,41 @@ body {
 
 	height: 10vh;
 }
+
+.ship {
+	position: relative;
+	display: inline-block;
+}
+
+#ship-1 {
+	height: auto;
+	width: auto;
+	max-height: 10rem;
+}
+
+#ship-2 {
+	height: auto;
+	width: auto;
+	max-height: 8.5rem;
+}
+
+#ship-3 {
+	height: auto;
+	width: auto;
+	max-height: 7.5rem;
+}
+
+#ship-4 {
+	height: auto;
+	width: auto;
+	max-height: 6.5rem;
+}
+
+.ship-boundary {
+	border: 1px solid white;
+	position: absolute;
+	top: 0;
+	left: 24%;
+	height: 100%;
+	width: 50%;
+}
