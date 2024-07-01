@@ -2,11 +2,13 @@ const scoreBox = document.querySelector('.score');
 const score = document.querySelector('.score-value');
 const bird = document.querySelector('.bird');
 const startMessage = document.querySelector('.start-message');
+const gameOverMessage = document.querySelector('.game-over');
 
 let gameState = 'start';
 
 bird.style.display = 'none';
 scoreBox.style.display = 'none';
+gameOverMessage.style.display = 'none';
 
 
 
