@@ -35,6 +35,25 @@ body {
 	padding: 2rem;
 }
 
+.game-over {
+	position: absolute;
+	text-align: center;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+
+	height: 100px;
+	width: 350px;
+
+	border-radius: 20px;
+	background-color: rgba(255, 255, 255, 0.5);
+	padding: 2rem;
+}
+
+.game-over h2 {
+	font-size: 75%;
+}
+
 .score {
     position: absolute;
     top: 2rem;
