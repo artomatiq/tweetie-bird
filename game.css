@@ -14,6 +14,7 @@ body {
 }
 
 .background {
+	position: relative;
 	width: 100vw;
 	height: 100vh;
 	background-image: url('./assets/visual/background.png');
@@ -79,36 +80,64 @@ body {
 	height: 10vh;
 }
 
-.ship {
+.ships {
+	position: absolute;
+	display: grid;
+	grid-template-rows: auto 20vh auto;
+	height: 100vh;
+
+
+	left: 20rem;
+}
+
+.ship-gap {
+}
+
+.ships > .top {
 	position: relative;
-	display: inline-block;
+	top: 0;
+	display: flex;
+	justify-content: center;
+	align-items: flex-start;
 }
 
-#ship-1 {
-	height: 45vh;
-	width: 16vh;
+.ships > .bottom {
+	position: relative;
+	bottom: 0;
+	display: flex;
+	justify-content: center;
+	align-items: flex-end;
 }
 
-#ship-2 {
-	height: 35vh;
-	width: 15vh;
-}
-
-#ship-3 {
-	height: 25vh;
+#ship-1-up {
+	top: 0;
+	height: 100%;
 	width: 12vh;
 }
 
-#ship-4 {
-	height: 15vh;
-	width: 8vh;
+#ship-1-down {
+	bottom: 0;
+	height: 100%;
+	width: 12vh;
 }
 
-.ship-boundary {
-	border: 1px solid white;
+#ship1-bounds-up {
+	border: 1px dotted ivory;
 	position: absolute;
 	top: 0;
-	left: 24%;
+	left: 50%;
+	transform: translateX(-50%);
+	width: 20%;
 	height: 100%;
-	width: 50%;
 }
+
+#ship1-bounds-down {
+	border: 1px dotted ivory;
+	position: absolute;
+	bottom: 0;
+	left: 50%;
+	transform: translateX(-50%);
+	width: 20%;
+	height: 100%;
+}
+
