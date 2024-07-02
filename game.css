@@ -39,6 +39,7 @@ body {
 }
 
 .game-over {
+	display: none;
 	position: absolute;
 	text-align: center;
 	top: 50%;
@@ -58,8 +59,8 @@ body {
 }
 
 .score {
+	display: none;
     position: absolute;
-	display: flex;
     top: 2rem;
     right: 3rem;
 	color: rgb(0, 0, 0);
@@ -85,11 +86,11 @@ body {
 }
 
 .bird {
+	display: none;
 	position: absolute;
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
-
 	height: 8vh;
 }
 
