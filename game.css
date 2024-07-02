@@ -59,18 +59,29 @@ body {
 
 .score {
     position: absolute;
+	display: flex;
     top: 2rem;
     right: 3rem;
 	color: rgb(0, 0, 0);
     background-color: rgb(255, 255, 255);
-    padding: 10px 20px; 
+    padding: 1px 10px 10px; 
     border-radius: 20px; 
-    font-size: 1rem; 
+    letter-spacing: 2px; 
     box-shadow: 0 0 10px 10px #fff, 
                 0 0 20px 10px #fff,
                 0 0 30px 15px #fff; 
     border: none; 
-	z-index: -50;
+	z-index: 50;
+}
+
+.score-message {
+	font-size: 20px;
+	letter-spacing: 5px;
+}
+
+.score-value {
+	font-size: 20px;
+	letter-spacing: 5px;
 }
 
 .bird {
