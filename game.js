@@ -8,19 +8,7 @@ const bird = document.querySelector('.bird');
 const startMessage = document.querySelector('.start-message');
 const gameOverMessage = document.querySelector('.game-over');
 
-const ships1 = document.querySelector('#ships1');
-// const ships2 = document.querySelector('#ships2');
-// const ships3 = document.querySelector('#ships3');
-
-const ships = [
-    ships1, 
-    // ships2, 
-    // ships3
-];
-
-
-
-
+const ship = document.querySelector('#ships1');
 
 let gameState = 'start';
 
@@ -33,16 +21,10 @@ scoreBox.style.display = 'none';
 //hide the game over message
 gameOverMessage.style.display = 'none';
 
-//hide the ships and get their positions
-ships.forEach((ship) => {
-    // ship.style.display = 'none';
-    ship.position = ship.getBoundingClientRect();
-    console.log(ship);
-});
+//hide the ship
+// ship.style.display = 'none';
 
-// ships1.style.left = '100%';
-
-console.log(getComputedStyle(ships1).left)
+ship.style.left = '100%';
 
 document.addEventListener('keydown', (e) => {
     if (e.key === 'Enter') {
@@ -53,18 +35,28 @@ document.addEventListener('keydown', (e) => {
     }
 });
 
-function runShips (ships) {
-    setInterval( () => {
-        // generate random integer for array index
-        
+let clone = ship.cloneNode(true);
+console.log(clone.children)
 
-        ships1.style.left = `${parseInt(getComputedStyle(ships1).left) - 1}px`;
+function runShips (ship) {
+    
+    const gaps = [
+        {up: '100%', down: '100%'} ,
+        {up: '100%', down: '50vh'}, 
+        {up: '50vh', down: '100%'}
+    ]
+
+    setInterval( () => {        
+        let clone = ship.cloneNode(true);
+        
+        //randomly decide gap
+
+
+        // ship.style.left = `${parseInt(getComputedStyle(ships1).left) - 1}px`;
     }, 20)
 }
 
-console.log(ships1)
-
-// runShips()
+// runShips(ship)
 
 
 //find the difference between the .ships
