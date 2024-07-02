@@ -18,6 +18,10 @@ const ships = [
     // ships3
 ];
 
+
+
+
+
 let gameState = 'start';
 
 //hide the bird
@@ -36,7 +40,7 @@ ships.forEach((ship) => {
     console.log(ship);
 });
 
-ships1.style.left = '100%';
+// ships1.style.left = '100%';
 
 console.log(getComputedStyle(ships1).left)
 
@@ -49,11 +53,42 @@ document.addEventListener('keydown', (e) => {
     }
 });
 
-// function runShips (ships) {
-//     setInterval( () => {
-//         //generate random integer for array index
-//         let random = Math.floor(Math.random() * 1);
-//         let ship = ships[random];
-//         ship.position.x = 1000;
-//     }, 10)
-// }
+function runShips (ships) {
+    setInterval( () => {
+        // generate random integer for array index
+        
+
+        ships1.style.left = `${parseInt(getComputedStyle(ships1).left) - 1}px`;
+    }, 20)
+}
+
+console.log(ships1)
+
+// runShips()
+
+
+//find the difference between the .ships
+//have only one ship in HTML and programatically generate the rest of them by cloning the first one
+//append them to the document at consistent intervals to have them run across the screen
+//remove them from the document when they reach the end of the screen
+
+
+
+/* #ship-2-up {
+	height: 100%;
+}
+
+#ship-2-down {
+	height: 50vh;
+} */
+
+
+
+
+/* #ship-3-up {
+	height: 50vh;
+}
+
+#ship-3-down {
+	height: 100%;
+} */
