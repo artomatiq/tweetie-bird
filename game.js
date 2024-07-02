@@ -8,24 +8,37 @@ const bird = document.querySelector('.bird');
 const startMessage = document.querySelector('.start-message');
 const gameOverMessage = document.querySelector('.game-over');
 
-const ship1 = document.querySelector('#ship1-bounds');
-const ship2 = document.querySelector('#ship2-bounds');
-const ship3 = document.querySelector('#ship3-bounds');
-const ship4 = document.querySelector('#ship4-bounds');
+const ships1 = document.querySelector('#ships1');
+// const ships2 = document.querySelector('#ships2');
+// const ships3 = document.querySelector('#ships3');
 
-const ships = [ship1, ship2, ship3, ship4];
+const ships = [
+    ships1, 
+    // ships2, 
+    // ships3
+];
 
 let gameState = 'start';
 
+//hide the bird
 bird.style.display = 'none';
+
+//hide the score box
 scoreBox.style.display = 'none';
+
+//hide the game over message
 gameOverMessage.style.display = 'none';
+
+//hide the ships and get their positions
 ships.forEach((ship) => {
     // ship.style.display = 'none';
     ship.position = ship.getBoundingClientRect();
+    console.log(ship);
 });
 
-console.log(ships[0].position);
+ships1.style.left = '100%';
+
+console.log(getComputedStyle(ships1).left)
 
 document.addEventListener('keydown', (e) => {
     if (e.key === 'Enter') {
@@ -36,8 +49,11 @@ document.addEventListener('keydown', (e) => {
     }
 });
 
-function runShips (ships) {
-    setInterval( () => {
-
-    }, )
-}
+// function runShips (ships) {
+//     setInterval( () => {
+//         //generate random integer for array index
+//         let random = Math.floor(Math.random() * 1);
+//         let ship = ships[random];
+//         ship.position.x = 1000;
+//     }, 10)
+// }
