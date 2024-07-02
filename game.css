@@ -19,7 +19,7 @@ body {
 	height: 100vh;
 	background-image: url('./assets/visual/background.png');
 	background-size: cover;
-	overflow: hidden;
+	/* overflow: hidden; */
 	z-index: -100;
 }
 
@@ -89,7 +89,7 @@ body {
 	width: 12vh;
 
 
-	left: 20rem;
+	left: 100%;
 }
 
 .ship-gap {
@@ -111,19 +111,19 @@ body {
 	align-items: flex-end;
 }
 
-#ship-1-up {
+#ship-up {
 	top: 0;
 	height: 100%;
 	width: 12vh;
 }
 
-#ship-1-down {
+#ship-down {
 	bottom: 0;
 	height: 100%;
 	width: 12vh;
 }
 
-#ship1-bounds-up {
+#bounds-up {
 	border: 1px dotted ivory;
 	position: absolute;
 	top: 0;
@@ -133,7 +133,7 @@ body {
 	height: 100%;
 }
 
-#ship1-bounds-down {
+#bounds-down {
 	border: 1px dotted ivory;
 	position: absolute;
 	bottom: 0;
@@ -142,36 +142,3 @@ body {
 	width: 20%;
 	height: 100%;
 }
-
-
-
-/* #ship-2-up {
-	top: 0;
-	height: 100%;
-	width: 12vh;
-}
-
-#ship-2-down {
-	bottom: 0;
-	height: 50vh;
-	width: 12vh;
-} */
-
-
-
-
-/* #ship-3-up {
-	top: 0;
-	height: 50vh;
-	width: 12vh;
-}
-
-#ship-3-down {
-	bottom: 0;
-	height: 100%;
-	width: 12vh;
-} */
-
-
-
-

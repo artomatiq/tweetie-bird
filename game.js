@@ -37,22 +37,26 @@ document.addEventListener('keydown', (e) => {
 
 function runShips (ship) {
 
+    document.querySelector('.background').appendChild(generateRandomShip());
+
+    setInterval( () => {        
+        // ship.style.left = `${parseInt(getComputedStyle(ships1).left) - 1}px`;
+    }, 20)
+}
+
+function generateRandomShip () {
     const gaps = [
         {up: '100%', down: '100%'} ,
         {up: '100%', down: '50vh'}, 
         {up: '50vh', down: '100%'}
     ]
-
     let clone = ship.cloneNode(true);
     let gap = gaps[Math.floor(Math.random() * gaps.length)];
     console.log(gap)
-    clone.querySelector('#ship-1-up').style.height = gap.up;
-    clone.querySelector('#ship-1-down').style.height = gap.down;
-    document.querySelector('.background').appendChild(clone);
+    clone.querySelector('#ship-up').style.height = gap.up;
+    clone.querySelector('#ship-down').style.height = gap.down;
 
-    setInterval( () => {        
-        // ship.style.left = `${parseInt(getComputedStyle(ships1).left) - 1}px`;
-    }, 20)
+    return clone;
 }
 
 runShips(ship)
