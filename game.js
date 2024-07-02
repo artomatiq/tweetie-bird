@@ -24,7 +24,7 @@ gameOverMessage.style.display = 'none';
 //hide the ship
 // ship.style.display = 'none';
 
-ship.style.left = '100%';
+// ship.style.left = '100%';
 
 document.addEventListener('keydown', (e) => {
     if (e.key === 'Enter') {
@@ -35,28 +35,37 @@ document.addEventListener('keydown', (e) => {
     }
 });
 
-let clone = ship.cloneNode(true);
-console.log(clone.children)
-
 function runShips (ship) {
-    
+
     const gaps = [
         {up: '100%', down: '100%'} ,
         {up: '100%', down: '50vh'}, 
         {up: '50vh', down: '100%'}
     ]
 
+    let clone = ship.cloneNode(true);
+    let gap = gaps[Math.floor(Math.random() * gaps.length)];
+    console.log(gap)
+    clone.querySelector('#ship-1-up').style.height = gap.up;
+    clone.querySelector('#ship-1-down').style.height = gap.down;
+    document.querySelector('.background').appendChild(clone);
+
     setInterval( () => {        
-        let clone = ship.cloneNode(true);
-        
-        //randomly decide gap
-
-
         // ship.style.left = `${parseInt(getComputedStyle(ships1).left) - 1}px`;
     }, 20)
 }
 
-// runShips(ship)
+runShips(ship)
+
+
+
+
+
+
+
+
+
+
 
 
 //find the difference between the .ships
