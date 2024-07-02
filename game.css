@@ -141,3 +141,35 @@ body {
 	height: 100%;
 }
 
+
+
+#ship-2-up {
+	top: 0;
+	height: 100%;
+	width: 12vh;
+}
+
+#ship-2-down {
+	bottom: 0;
+	height: 50vh;
+	width: 12vh;
+}
+
+
+
+
+#ship-3-up {
+	top: 0;
+	height: 50vh;
+	width: 12vh;
+}
+
+#ship-3-down {
+	bottom: 0;
+	height: 100%;
+	width: 12vh;
+}
+
+
+
+
