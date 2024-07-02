@@ -35,13 +35,19 @@ document.addEventListener('keydown', (e) => {
     }
 });
 
-function runShips (ship) {
+function runShips () {
 
-    document.querySelector('.background').appendChild(generateRandomShip());
+    //create random ship every 5 seconds
+    setInterval(() => {
+        const randomShip = generateRandomShip();
+        document.querySelector('.background').appendChild(randomShip);
+    }, 5000);
 
-    setInterval( () => {        
-        // ship.style.left = `${parseInt(getComputedStyle(ships1).left) - 1}px`;
-    }, 20)
+    //run all ships across the screen
+    requestAnimationFrame(updateShipPositions);
+
+    //clear ships that are out of the screen every 10 seconds
+    clearShips();
 }
 
 function generateRandomShip () {
@@ -55,11 +61,29 @@ function generateRandomShip () {
     console.log(gap)
     clone.querySelector('#ship-up').style.height = gap.up;
     clone.querySelector('#ship-down').style.height = gap.down;
+    clone.style.left = '100%';
 
     return clone;
 }
 
-runShips(ship)
+function updateShipPositions() {
+    document.querySelectorAll('.ships').forEach(ship => {
+        ship.style.left = `${parseInt(getComputedStyle(ship).left) - 1}px`;
+    });
+    requestAnimationFrame(updateShipPositions);
+}
+
+function clearShips () {
+    setInterval(() => {
+        document.querySelectorAll('.ships').forEach(ship => {
+            if (parseInt(getComputedStyle(ship).left) < -100) {
+                ship.remove();
+            }
+        })
+    }, 10000)
+}
+
+// runShips()
 
 
 

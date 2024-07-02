@@ -19,7 +19,7 @@ body {
 	height: 100vh;
 	background-image: url('./assets/visual/background.png');
 	background-size: cover;
-	/* overflow: hidden; */
+	overflow: hidden;
 	z-index: -100;
 }
 
@@ -70,6 +70,7 @@ body {
                 0 0 20px 10px #fff,
                 0 0 30px 15px #fff; 
     border: none; 
+	z-index: -50;
 }
 
 .bird {
@@ -78,7 +79,7 @@ body {
 	left: 50%;
 	transform: translate(-50%, -50%);
 
-	height: 10vh;
+	height: 8vh;
 }
 
 .ships {
