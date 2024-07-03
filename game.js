@@ -17,7 +17,8 @@ const gravityConstant = 0.6;
 const loops = {
     generateShipsInterval: null,
     clearShipsInterval: null,
-    listenForCrashInterval: null
+    listenForCrashInterval: null,
+    gravityAnimation: null
 }
 
 let mode = gameStates.start;
@@ -47,6 +48,9 @@ function handleSpace (e) {
     }
 }
 
+
+
+
 function generateShipsInterval () {
     loops.generateShipsInterval = setInterval(() => {
         const randomShip = generateRandomShip();
@@ -54,6 +58,28 @@ function generateShipsInterval () {
     }, 2500);
     console.log('interval created', loops.generateShipsInterval);
 }
+
+function listenForCrashInterval () {
+    loops.listenForCrashInterval = setInterval(() => {
+        if (mode === gameStates.play) {
+            const birdBox = bird.getBoundingClientRect();
+            document.querySelectorAll('.boundary-up, .boundary-down').forEach(ship => {
+                const shipBox = ship.getBoundingClientRect();
+                if (
+                    shipBox.left < birdBox.right &&
+                    shipBox.right > birdBox.left &&
+                    shipBox.top < birdBox.bottom && 
+                    shipBox.bottom > birdBox.top
+                ) {
+                        endGame();
+                    }
+            })
+        }
+    }, 10)
+}
+
+
+
 
 function startGame () {
     //set game mode to play
@@ -88,7 +114,7 @@ function startGravity () {
         requestAnimationFrame(gravity);
     }
 
-    requestAnimationFrame(gravity);
+    loops.gravityAnimation = requestAnimationFrame(gravity);
 }
 
 function jump () {
@@ -116,24 +142,7 @@ function runShips () {
     clearShips();
 }
 
-function listenForCrashInterval () {
-    loops.listenForCrashInterval = setInterval(() => {
-        if (mode === gameStates.play) {
-            const birdBox = bird.getBoundingClientRect();
-            document.querySelectorAll('.boundary-up, .boundary-down').forEach(ship => {
-                const shipBox = ship.getBoundingClientRect();
-                if (
-                    shipBox.left < birdBox.right &&
-                    shipBox.right > birdBox.left &&
-                    shipBox.top < birdBox.bottom && 
-                    shipBox.bottom > birdBox.top
-                ) {
-                        endGame();
-                    }
-            })
-        }
-    }, 10)
-}
+
 
 function generateRandomShip () {
 
@@ -171,8 +180,9 @@ function endGame () {
     //remove the jump event listener 
     document.removeEventListener('keydown', handleSpace);
     //stop ships interval
-    console.log('interval about to be removed', loops.generateShipsInterval);
     clearInterval(loops.generateShipsInterval);
+    //stop gravity animation
+    cancelAnimationFrame(loops.gravityAnimation);
     
     gameOverMessage.style.display = 'block';
     scoreBox.style.display = 'none';
