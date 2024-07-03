@@ -57,10 +57,14 @@ function listenForCrashInterval () {
             document.querySelectorAll('.boundary-up, .boundary-down').forEach(ship => {
                 const shipBox = ship.getBoundingClientRect();
                 if (
-                    shipBox.left < birdBox.right &&
+                    //bird crashes with ship
+                    (shipBox.left < birdBox.right &&
                     shipBox.right > birdBox.left &&
                     shipBox.top < birdBox.bottom && 
-                    shipBox.bottom > birdBox.top
+                    shipBox.bottom > birdBox.top)
+                    || 
+                    //bird crashes with window
+                    birdBox.top < 0 || birdBox.bottom > window.innerHeight
                 ) {
                         endGame();
                     }
@@ -172,7 +176,7 @@ function clearShipsInterval () {
 function endGame () {
     mode = gameStates.crash;
 
-
+    
     //reset values
     resetValues();
     //remove the jump event listener 
