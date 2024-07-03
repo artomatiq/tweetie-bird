@@ -14,6 +14,7 @@ const gameStates = {
 }
 let velocity = 0;
 const gravityConstant = 0.6;
+
 const loops = {
     generateShipsInterval: null,
     slideShipsAnimation: null,
@@ -25,16 +26,6 @@ const loops = {
 let mode = gameStates.start;
 
 document.addEventListener('keydown', handleEnter);
-
-
-
-
-
-
-
-
-
-
 
 function handleEnter (e) {
     if (e.key === 'Enter') {
@@ -93,15 +84,17 @@ function startGame () {
     //show the bird
     bird.style.display = 'block';
 
-    //clear jump event listener
-    document.removeEventListener('keydown', handleEnter);
-    //listen for jump button
-    document.addEventListener('keydown', handleSpace)
-
     //reset values
     resetValues();
+    //remove the jump event listener 
+    document.removeEventListener('keydown', handleSpace);
 
+    clearIntervalsAndAnimations();
 
+    //listen for enter button
+    document.addEventListener('keydown', handleEnter);
+    //listen for jump button
+    document.addEventListener('keydown', handleSpace)
     //start ships animation
     runShips();
     //start gravity and bird animation
@@ -178,26 +171,20 @@ function clearShipsInterval () {
 
 function endGame () {
     mode = gameStates.crash;
+
+
     //reset values
     resetValues();
     //remove the jump event listener 
     document.removeEventListener('keydown', handleSpace);
-    //stop ships interval
-    clearInterval(loops.generateShipsInterval);
-    //stop gravity animation
-    cancelAnimationFrame(loops.gravityAnimation);
-    //stop ships animation
-    cancelAnimationFrame(loops.slideShipsAnimation);
-    //stop listening for crash interval
-    clearInterval(loops.listenForCrashInterval);
-    //stop clearing ships interval
-    clearInterval(loops.clearShipsInterval);
     
+    clearIntervalsAndAnimations();
+
     gameOverMessage.style.display = 'block';
     scoreBox.style.display = 'none';
     bird.style.display = 'none';
-    document.querySelectorAll('.ships').forEach(ship => {
-        ship.remove();
+    document.querySelectorAll('.ships').forEach(shipPair => {
+        shipPair.remove();
     })
 }
 
@@ -205,4 +192,34 @@ function resetValues () {
     velocity = 0;
     bird.style.top = '50vh';
     score.textContent = 0;
+}
+
+function clearIntervalsAndAnimations() {
+    // Clear all intervals
+    if (loops.generateShipsInterval) {
+        console.log('Clearing ships interval:', loops.generateShipsInterval);
+        clearInterval(loops.generateShipsInterval);
+        loops.generateShipsInterval = null;
+    }
+    if (loops.listenForCrashInterval) {
+        console.log('Clearing crash detection interval:', loops.listenForCrashInterval);
+        clearInterval(loops.listenForCrashInterval);
+        loops.listenForCrashInterval = null;
+    }
+    if (loops.clearShipsInterval) {
+        console.log('Clearing clear ships interval:', loops.clearShipsInterval);
+        clearInterval(loops.clearShipsInterval);
+        loops.clearShipsInterval = null;
+    }
+    // Cancel all animations
+    if (loops.gravityAnimation) {
+        console.log('Cancelling gravity animation:', loops.gravityAnimation);
+        cancelAnimationFrame(loops.gravityAnimation);
+        loops.gravityAnimation = null;
+    }
+    if (loops.slideShipsAnimation) {
+        console.log('Cancelling ships animation:', loops.slideShipsAnimation);
+        cancelAnimationFrame(loops.slideShipsAnimation);
+        loops.slideShipsAnimation = null;
+    }
 }
