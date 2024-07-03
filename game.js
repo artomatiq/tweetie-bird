@@ -14,49 +14,68 @@ const gameStates = {
 }
 let velocity = 0;
 const gravityConstant = 0.6;
+const loops = {
+    generateShipsInterval: null,
+    clearShipsInterval: null,
+    listenForCrashInterval: null
+}
 
 let mode = gameStates.start;
 
+document.addEventListener('keydown', handleEnter);
 
 
-document.addEventListener('keydown', (e) => {
+
+
+
+
+
+
+
+
+
+function handleEnter (e) {
     if (e.key === 'Enter') {
-        if (mode === gameStates.play) return;
+        if (mode === gameStates.play) return
         startGame();
     }
-});
+}
+
+function handleSpace (e) {
+    if (e.key === ' ') {
+        jump();
+    }
+}
+
+function generateShipsInterval () {
+    loops.generateShipsInterval = setInterval(() => {
+        const randomShip = generateRandomShip();
+        document.querySelector('.background').appendChild(randomShip);
+    }, 2500);
+    console.log('interval created', loops.generateShipsInterval);
+}
 
 function startGame () {
     //set game mode to play
     mode = gameStates.play;
     //hide start message
     startMessage.style.display = 'none';
+    //hide game over message
+    gameOverMessage.style.display = 'none';
     //show the score box
     scoreBox.style.display = 'block';
     //show the bird
     bird.style.display = 'block';
     //listen for jump button
-    document.addEventListener('keydown', (e) => {
-        if (e.key === ' ') {
-            jump()
-        }
-    })
-    //listen for crash
-    listenForCrash();
+    document.addEventListener('keydown', handleSpace)
+    //reset values
+    resetValues();
     //start ships animation
     runShips();
     //start gravity and bird animation
     startGravity()
-}
-
-function endGame () {
-    mode = gameStates.crash;
-    gameOverMessage.style.display = 'block';
-    scoreBox.style.display = 'none';
-    bird.style.display = 'none';
-    document.querySelectorAll('.ships').forEach(ship => {
-        ship.remove();
-    })
+    //listen for crash
+    listenForCrashInterval();
 }
 
 function startGravity () {
@@ -82,10 +101,7 @@ function runShips () {
     if (mode !== gameStates.play) return;
 
     //create random ship every 5 seconds
-    setInterval(() => {
-        const randomShip = generateRandomShip();
-        document.querySelector('.background').appendChild(randomShip);
-    }, 2500);
+    generateShipsInterval();
 
     function updateShipPositions() {
         document.querySelectorAll('.ships').forEach(ship => {
@@ -100,8 +116,8 @@ function runShips () {
     clearShips();
 }
 
-function listenForCrash () {
-    setInterval(() => {
+function listenForCrashInterval () {
+    loops.listenForCrashInterval = setInterval(() => {
         if (mode === gameStates.play) {
             const birdBox = bird.getBoundingClientRect();
             document.querySelectorAll('.boundary-up, .boundary-down').forEach(ship => {
@@ -112,13 +128,7 @@ function listenForCrash () {
                     shipBox.top < birdBox.bottom && 
                     shipBox.bottom > birdBox.top
                 ) {
-                        mode = gameStates.crash;
-                        gameOverMessage.style.display = 'block';
-                        scoreBox.style.display = 'none';
-                        bird.style.display = 'none';
-                        document.querySelectorAll('.ships').forEach(ship => {
-                            ship.remove();
-                        })
+                        endGame();
                     }
             })
         }
@@ -154,4 +164,26 @@ function clearShips () {
             }
         })
     }, 10000)
+}
+
+function endGame () {
+    mode = gameStates.crash;
+    //remove the jump event listener 
+    document.removeEventListener('keydown', handleSpace);
+    //stop ships interval
+    console.log('interval about to be removed', loops.generateShipsInterval);
+    clearInterval(loops.generateShipsInterval);
+    
+    gameOverMessage.style.display = 'block';
+    scoreBox.style.display = 'none';
+    bird.style.display = 'none';
+    document.querySelectorAll('.ships').forEach(ship => {
+        ship.remove();
+    })
+}
+
+function resetValues () {
+    velocity = 0;
+    bird.style.top = '50vh';
+    score.textContent = 0;
 }
