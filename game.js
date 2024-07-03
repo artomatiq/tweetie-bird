@@ -12,43 +12,55 @@ const gameStates = {
     play: 'play',
     crash: 'crash'
 }
+let velocity = 0;
+const gravityConstant = 0.6;
 
 let mode = gameStates.start;
 
+
+
 document.addEventListener('keydown', (e) => {
     if (e.key === 'Enter') {
+        if (mode === gameStates.play) return;
         startGame();
-
-        
     }
 });
 
 function startGame () {
-    gameState = 'play';
+    //set game mode to play
+    mode = gameStates.play;
     //hide start message
     startMessage.style.display = 'none';
     //show the score box
     scoreBox.style.display = 'block';
-    //show the bird and allow it to fly
+    //show the bird
     bird.style.display = 'block';
-
+    //listen for jump button
     document.addEventListener('keydown', (e) => {
         if (e.key === ' ') {
-
+            jump()
         }
     })
-
+    //listen for crash
+    listenForCrash();
+    //start ships animation
     runShips();
+    //start gravity and bird animation
     startGravity()
 }
 
-
-
+function endGame () {
+    mode = gameStates.crash;
+    gameOverMessage.style.display = 'block';
+    scoreBox.style.display = 'none';
+    bird.style.display = 'none';
+    document.querySelectorAll('.ships').forEach(ship => {
+        ship.remove();
+    })
+}
 
 function startGravity () {
-    let velocity = 0;
-    const gravityConstant = 0.25;
-    
+    if (mode !== gameStates.play) return;
     function gravity () {
         velocity += gravityConstant;
         let position = parseInt(getComputedStyle(bird).top) + velocity;
@@ -60,14 +72,27 @@ function startGravity () {
     requestAnimationFrame(gravity);
 }
 
+function jump () {
+    if (mode !== gameStates.play) return;
+    velocity = -9.5;
+}
+
 function runShips () {
+
+    if (mode !== gameStates.play) return;
 
     //create random ship every 5 seconds
     setInterval(() => {
         const randomShip = generateRandomShip();
         document.querySelector('.background').appendChild(randomShip);
-    }, 5000);
+    }, 2500);
 
+    function updateShipPositions() {
+        document.querySelectorAll('.ships').forEach(ship => {
+            ship.style.left = `${parseInt(getComputedStyle(ship).left) - 3}px`;
+        });
+        requestAnimationFrame(updateShipPositions);
+    }
     //run all ships across the screen
     requestAnimationFrame(updateShipPositions);
 
@@ -75,7 +100,35 @@ function runShips () {
     clearShips();
 }
 
+function listenForCrash () {
+    setInterval(() => {
+        if (mode === gameStates.play) {
+            const birdBox = bird.getBoundingClientRect();
+            document.querySelectorAll('.boundary-up, .boundary-down').forEach(ship => {
+                const shipBox = ship.getBoundingClientRect();
+                if (
+                    shipBox.left < birdBox.right &&
+                    shipBox.right > birdBox.left &&
+                    shipBox.top < birdBox.bottom && 
+                    shipBox.bottom > birdBox.top
+                ) {
+                        mode = gameStates.crash;
+                        gameOverMessage.style.display = 'block';
+                        scoreBox.style.display = 'none';
+                        bird.style.display = 'none';
+                        document.querySelectorAll('.ships').forEach(ship => {
+                            ship.remove();
+                        })
+                    }
+            })
+        }
+    }, 10)
+}
+
 function generateRandomShip () {
+
+    if (mode !== gameStates.play) return;
+
     const gaps = [
         {up: '100%', down: '100%'} ,
         {up: '100%', down: '50vh'}, 
@@ -83,7 +136,6 @@ function generateRandomShip () {
     ]
     let clone = ship.cloneNode(true);
     let gap = gaps[Math.floor(Math.random() * gaps.length)];
-    console.log(gap)
     clone.querySelector('#ship-up').style.height = gap.up;
     clone.querySelector('#ship-down').style.height = gap.down;
     clone.style.left = '100%';
@@ -91,14 +143,10 @@ function generateRandomShip () {
     return clone;
 }
 
-function updateShipPositions() {
-    document.querySelectorAll('.ships').forEach(ship => {
-        ship.style.left = `${parseInt(getComputedStyle(ship).left) - 1}px`;
-    });
-    requestAnimationFrame(updateShipPositions);
-}
-
 function clearShips () {
+
+    if (mode !== gameStates.play) return;
+
     setInterval(() => {
         document.querySelectorAll('.ships').forEach(ship => {
             if (parseInt(getComputedStyle(ship).left) < -100) {
@@ -107,5 +155,3 @@ function clearShips () {
         })
     }, 10000)
 }
-
-// startGame();
