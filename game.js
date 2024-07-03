@@ -16,9 +16,10 @@ let velocity = 0;
 const gravityConstant = 0.6;
 const loops = {
     generateShipsInterval: null,
+    slideShipsAnimation: null,
     clearShipsInterval: null,
     listenForCrashInterval: null,
-    gravityAnimation: null
+    gravityAnimation: null,
 }
 
 let mode = gameStates.start;
@@ -56,7 +57,6 @@ function generateShipsInterval () {
         const randomShip = generateRandomShip();
         document.querySelector('.background').appendChild(randomShip);
     }, 2500);
-    console.log('interval created', loops.generateShipsInterval);
 }
 
 function listenForCrashInterval () {
@@ -136,7 +136,7 @@ function runShips () {
         requestAnimationFrame(updateShipPositions);
     }
     //run all ships across the screen
-    requestAnimationFrame(updateShipPositions);
+    loops.slideShipsAnimation = requestAnimationFrame(updateShipPositions);
 
     //clear ships that are out of the screen every 10 seconds
     clearShips();
@@ -183,6 +183,8 @@ function endGame () {
     clearInterval(loops.generateShipsInterval);
     //stop gravity animation
     cancelAnimationFrame(loops.gravityAnimation);
+    //stop ships animation
+    cancelAnimationFrame(loops.slideShipsAnimation);
     
     gameOverMessage.style.display = 'block';
     scoreBox.style.display = 'none';
