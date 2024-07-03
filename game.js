@@ -92,10 +92,16 @@ function startGame () {
     scoreBox.style.display = 'block';
     //show the bird
     bird.style.display = 'block';
+
+    //clear jump event listener
+    document.removeEventListener('keydown', handleEnter);
     //listen for jump button
     document.addEventListener('keydown', handleSpace)
+
     //reset values
     resetValues();
+
+
     //start ships animation
     runShips();
     //start gravity and bird animation
@@ -105,7 +111,6 @@ function startGame () {
 }
 
 function startGravity () {
-    if (mode !== gameStates.play) return;
     function gravity () {
         velocity += gravityConstant;
         let position = parseInt(getComputedStyle(bird).top) + velocity;
@@ -118,14 +123,10 @@ function startGravity () {
 }
 
 function jump () {
-    if (mode !== gameStates.play) return;
     velocity = -9.5;
 }
 
 function runShips () {
-
-    if (mode !== gameStates.play) return;
-
     //create random ship every 5 seconds
     generateShipsInterval();
 
@@ -139,7 +140,7 @@ function runShips () {
     loops.slideShipsAnimation = requestAnimationFrame(updateShipPositions);
 
     //clear ships that are out of the screen every 10 seconds
-    clearShips();
+    clearShipsInterval();
 }
 
 
@@ -162,11 +163,11 @@ function generateRandomShip () {
     return clone;
 }
 
-function clearShips () {
+function clearShipsInterval () {
 
     if (mode !== gameStates.play) return;
 
-    setInterval(() => {
+    loops.clearShipsInterval = setInterval(() => {
         document.querySelectorAll('.ships').forEach(ship => {
             if (parseInt(getComputedStyle(ship).left) < -100) {
                 ship.remove();
@@ -177,6 +178,8 @@ function clearShips () {
 
 function endGame () {
     mode = gameStates.crash;
+    //reset values
+    resetValues();
     //remove the jump event listener 
     document.removeEventListener('keydown', handleSpace);
     //stop ships interval
@@ -185,6 +188,10 @@ function endGame () {
     cancelAnimationFrame(loops.gravityAnimation);
     //stop ships animation
     cancelAnimationFrame(loops.slideShipsAnimation);
+    //stop listening for crash interval
+    clearInterval(loops.listenForCrashInterval);
+    //stop clearing ships interval
+    clearInterval(loops.clearShipsInterval);
     
     gameOverMessage.style.display = 'block';
     scoreBox.style.display = 'none';
