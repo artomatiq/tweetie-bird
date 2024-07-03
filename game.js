@@ -113,7 +113,7 @@ function startGravity () {
         let position = parseInt(getComputedStyle(bird).top) + velocity;
         bird.style.top = `${position}px`;
     
-        requestAnimationFrame(gravity);
+        loops.gravityAnimation = requestAnimationFrame(gravity);
     }
 
     loops.gravityAnimation = requestAnimationFrame(gravity);
@@ -131,7 +131,7 @@ function runShips () {
         document.querySelectorAll('.ships').forEach(ship => {
             ship.style.left = `${parseInt(getComputedStyle(ship).left) - 3}px`;
         });
-        requestAnimationFrame(updateShipPositions);
+        loops.slideShipsAnimation = requestAnimationFrame(updateShipPositions);
     }
     //run all ships across the screen
     loops.slideShipsAnimation = requestAnimationFrame(updateShipPositions);
@@ -176,7 +176,7 @@ function clearShipsInterval () {
 function endGame () {
     mode = gameStates.crash;
 
-    
+
     //reset values
     resetValues();
     //remove the jump event listener 
