@@ -201,28 +201,23 @@ function resetValues () {
 function clearIntervalsAndAnimations() {
     // Clear all intervals
     if (loops.generateShipsInterval) {
-        console.log('Clearing ships interval:', loops.generateShipsInterval);
         clearInterval(loops.generateShipsInterval);
         loops.generateShipsInterval = null;
     }
     if (loops.listenForCrashInterval) {
-        console.log('Clearing crash detection interval:', loops.listenForCrashInterval);
         clearInterval(loops.listenForCrashInterval);
         loops.listenForCrashInterval = null;
     }
     if (loops.clearShipsInterval) {
-        console.log('Clearing clear ships interval:', loops.clearShipsInterval);
         clearInterval(loops.clearShipsInterval);
         loops.clearShipsInterval = null;
     }
     // Cancel all animations
     if (loops.gravityAnimation) {
-        console.log('Cancelling gravity animation:', loops.gravityAnimation);
         cancelAnimationFrame(loops.gravityAnimation);
         loops.gravityAnimation = null;
     }
     if (loops.slideShipsAnimation) {
-        console.log('Cancelling ships animation:', loops.slideShipsAnimation);
         cancelAnimationFrame(loops.slideShipsAnimation);
         loops.slideShipsAnimation = null;
     }
