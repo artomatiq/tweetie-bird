@@ -30,6 +30,10 @@ let mode = gameStates.start;
 
 document.addEventListener('keydown', handleEnter);
 
+
+
+
+
 function handleEnter (e) {
     if (e.key === 'Enter') {
         if (mode === gameStates.play) return
@@ -91,7 +95,6 @@ function trackScoreInterval () {
 }
 
 function startGame () {
-
     
     //set game mode to play
     mode = gameStates.play;
