@@ -44,14 +44,15 @@ body {
 	text-align: center;
 	top: 50%;
 	left: 50%;
-	transform: translate(-50%, -50%);
-
-	height: 100px;
-	width: 350px;
+	transform: translate(-50%, -50%); 
 
 	border-radius: 20px;
 	background-color: rgba(255, 255, 255, 0.5);
 	padding: 2rem;
+}
+
+.game-over h1 {
+	font-size: 5vh;
 }
 
 .game-over h2 {

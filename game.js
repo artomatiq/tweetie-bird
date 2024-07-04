@@ -91,6 +91,8 @@ function trackScoreInterval () {
 }
 
 function startGame () {
+
+    
     //set game mode to play
     mode = gameStates.play;
     //hide start message
@@ -194,19 +196,26 @@ function clearShipsInterval () {
 }
 
 function endGame () {
+    console.log('end game triggered. The score is: ', score)
     mode = gameStates.crash;
 
+    clearIntervalsAndAnimations();
+
+    //show final score
+    const finalScore = document.querySelector('.final-score');
+    finalScore.textContent = `Your Score: ${score}`;
 
     //reset values
     resetValues();
+
     //remove the jump event listener 
     document.removeEventListener('keydown', handleSpace);
     
-    clearIntervalsAndAnimations();
-
     gameOverMessage.style.display = 'block';
     scoreBox.style.display = 'none';
     bird.style.display = 'none';
+
+    //clear all ships
     document.querySelectorAll('.ships').forEach(shipPair => {
         shipPair.remove();
     })
@@ -215,7 +224,8 @@ function endGame () {
 function resetValues () {
     velocity = 0;
     bird.style.top = '50vh';
-    score.textContent = 0;
+    score = 0;
+    scoreValue.textContent = 0;
 }
 
 function clearIntervalsAndAnimations() {
