@@ -51,6 +51,19 @@ body {
 	padding: 2rem;
 }
 
+.ready-message {
+	display: none;
+	position: absolute;
+	text-align: center;
+	top: 70%;
+	left: 50%;
+	transform: translate(-50%, -50%); 
+
+	border-radius: 20px;
+	background-color: rgba(255, 255, 255, 0.5);
+	padding: 0.5rem;
+}
+
 .game-over h1 {
 	font-size: 5vh;
 }

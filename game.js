@@ -5,10 +5,12 @@ const scoreBox = document.querySelector('.score');
 const scoreValue = document.querySelector('.score-value');
 const bird = document.querySelector('.bird');
 const startMessage = document.querySelector('.start-message');
+const readyMessage = document.querySelector('.ready-message');
 const gameOverMessage = document.querySelector('.game-over');
 const ship = document.querySelector('#ships1');
 const gameStates = {
     start: 'start',
+    ready: 'ready',
     play: 'play',
     crash: 'crash'
 }
@@ -37,16 +39,26 @@ document.addEventListener('keydown', handleEnter);
 function handleEnter (e) {
     if (e.key === 'Enter') {
         if (mode === gameStates.play) return
-        startGame();
+        if (mode === gameStates.start) {
+            getReady();
+        }
+        if (mode === gameStates.crash) {
+            getReady();
+        }
     }
 }
 
 function handleSpace (e) {
+    console.log('handle function triggered')
     if (e.key === ' ') {
-        jump();
+        if (mode === gameStates.ready) {
+            startGame();
+        }
+        if (mode === gameStates.play) {
+            jump();
+        }
     }
 }
-
 
 
 
@@ -94,44 +106,6 @@ function trackScoreInterval () {
     }, 100)
 }
 
-function startGame () {
-    
-    //set game mode to play
-    mode = gameStates.play;
-    //hide start message
-    startMessage.style.display = 'none';
-    //hide game over message
-    gameOverMessage.style.display = 'none';
-    //show the score box
-    scoreBox.style.display = 'block';
-    //show the bird
-    bird.style.display = 'block';
-
-    //reset values
-    resetValues();
-
-    clearIntervalsAndAnimations();
-
-    //remove enter button listener
-    document.removeEventListener('keydown', handleEnter);
-    //listen for enter button
-    document.addEventListener('keydown', handleEnter);
-
-    //remove jump button listener
-    document.removeEventListener('keydown', handleSpace);
-    //listen for jump button
-    document.addEventListener('keydown', handleSpace)
-
-    //start ships animation [ generateShipsInterval(), slideShipsAnimation(), clearShipsInterval() ]
-    runShips();
-    //start gravity animation [ gravity() ]
-    startGravity()
-    //start score tracking interval [ trackScoreInterval() ]
-    trackScoreInterval();
-    //start crash detection interval [ listenForCrashInterval() ]
-    listenForCrashInterval();
-}
-
 function startGravity () {
     function gravity () {
         velocity += gravityConstant;
@@ -165,8 +139,6 @@ function runShips () {
     clearShipsInterval();
 }
 
-
-
 function generateRandomShip () {
 
     if (mode !== gameStates.play) return;
@@ -196,6 +168,52 @@ function clearShipsInterval () {
             }
         })
     }, 10000)
+}
+
+function getReady () {
+    mode = gameStates.ready;
+    //hide
+    startMessage.style.display = 'none';
+    gameOverMessage.style.display = 'none';
+    scoreBox.style.display = 'none';
+    //show
+    readyMessage.style.display = 'block';
+    bird.style.display = 'block';
+
+    document.addEventListener('keydown', handleSpace);
+}
+
+function startGame () {
+    
+    mode = gameStates.play;
+    //hide
+    readyMessage.style.display = 'none';
+    //show
+    scoreBox.style.display = 'block';
+
+    //reset values
+    resetValues();
+
+    clearIntervalsAndAnimations();
+
+    //remove enter button listener
+    document.removeEventListener('keydown', handleEnter);
+    //listen for enter button
+    document.addEventListener('keydown', handleEnter);
+
+    //remove jump button listener
+    document.removeEventListener('keydown', handleSpace);
+    //listen for jump button
+    document.addEventListener('keydown', handleSpace)
+
+    //start ships animation [ generateShipsInterval(), slideShipsAnimation(), clearShipsInterval() ]
+    runShips();
+    //start gravity animation [ gravity() ]
+    startGravity()
+    //start score tracking interval [ trackScoreInterval() ]
+    trackScoreInterval();
+    //start crash detection interval [ listenForCrashInterval() ]
+    listenForCrashInterval();
 }
 
 function endGame () {
