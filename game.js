@@ -2,7 +2,7 @@ window.onload = () => {
     document.body.style.visibility = 'visible';
 };
 const scoreBox = document.querySelector('.score');
-const score = document.querySelector('.score-value');
+const scoreValue = document.querySelector('.score-value');
 const bird = document.querySelector('.bird');
 const startMessage = document.querySelector('.start-message');
 const gameOverMessage = document.querySelector('.game-over');
@@ -17,12 +17,15 @@ const gravityConstant = 0.6;
 
 const loops = {
     generateShipsInterval: null,
-    slideShipsAnimation: null,
-    clearShipsInterval: null,
+    trackScoreInterval: null,
     listenForCrashInterval: null,
+    clearShipsInterval: null,
+
+    slideShipsAnimation: null,
     gravityAnimation: null,
 }
 
+let score = 0;
 let mode = gameStates.start;
 
 document.addEventListener('keydown', handleEnter);
@@ -73,8 +76,19 @@ function listenForCrashInterval () {
     }, 10)
 }
 
-
-
+function trackScoreInterval () {
+    loops.trackScoreInterval = setInterval(() => {
+        if (mode === gameStates.play) {
+            document.querySelectorAll('.ships').forEach(ship => {
+                if (parseInt(getComputedStyle(ship).left) < parseInt(getComputedStyle(bird).left) && !ship.isScored) {
+                    score++;
+                    scoreValue.textContent = score;
+                    ship.isScored = true;
+                }
+            }
+        )}
+    }, 100)
+}
 
 function startGame () {
     //set game mode to play
@@ -90,20 +104,26 @@ function startGame () {
 
     //reset values
     resetValues();
-    //remove the jump event listener 
-    document.removeEventListener('keydown', handleSpace);
 
     clearIntervalsAndAnimations();
 
+    //remove enter button listener
+    document.removeEventListener('keydown', handleEnter);
     //listen for enter button
     document.addEventListener('keydown', handleEnter);
+
+    //remove jump button listener
+    document.removeEventListener('keydown', handleSpace);
     //listen for jump button
     document.addEventListener('keydown', handleSpace)
-    //start ships animation
+
+    //start ships animation [ generateShipsInterval(), slideShipsAnimation(), clearShipsInterval() ]
     runShips();
-    //start gravity and bird animation
+    //start gravity animation [ gravity() ]
     startGravity()
-    //listen for crash
+    //start score tracking interval [ trackScoreInterval() ]
+    trackScoreInterval();
+    //start crash detection interval [ listenForCrashInterval() ]
     listenForCrashInterval();
 }
 
@@ -127,14 +147,14 @@ function runShips () {
     //create random ship every 5 seconds
     generateShipsInterval();
 
-    function updateShipPositions() {
+    function slideShipsAnimation() {
         document.querySelectorAll('.ships').forEach(ship => {
             ship.style.left = `${parseInt(getComputedStyle(ship).left) - 3}px`;
         });
-        loops.slideShipsAnimation = requestAnimationFrame(updateShipPositions);
+        loops.slideShipsAnimation = requestAnimationFrame(slideShipsAnimation);
     }
     //run all ships across the screen
-    loops.slideShipsAnimation = requestAnimationFrame(updateShipPositions);
+    loops.slideShipsAnimation = requestAnimationFrame(slideShipsAnimation);
 
     //clear ships that are out of the screen every 10 seconds
     clearShipsInterval();
@@ -211,6 +231,10 @@ function clearIntervalsAndAnimations() {
     if (loops.clearShipsInterval) {
         clearInterval(loops.clearShipsInterval);
         loops.clearShipsInterval = null;
+    }
+    if (loops.trackScoreInterval) {
+        clearInterval(loops.trackScoreInterval);
+        loops.trackScoreInterval = null;
     }
     // Cancel all animations
     if (loops.gravityAnimation) {
