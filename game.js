@@ -49,7 +49,6 @@ function handleEnter (e) {
 }
 
 function handleSpace (e) {
-    console.log('handle function triggered')
     if (e.key === ' ') {
         if (mode === gameStates.ready) {
             startGame();
@@ -119,6 +118,32 @@ function startGravity () {
 }
 
 function jump () {
+
+    setTimeout(() => {
+        bird.src = './assets/visual/animation/bird-flap-1.PNG'
+    }, 0);
+    setTimeout(() => {
+        bird.src = './assets/visual/animation/bird-flap-2.PNG'
+    }, 30);
+    setTimeout(() => {
+        bird.src = './assets/visual/animation/bird-flap-3.png'
+    }, 60);
+    setTimeout(() => {
+        bird.src = './assets/visual/animation/bird-flap-0.png'
+    }, 100);
+    setTimeout(() => {
+        bird.src = './assets/visual/animation/bird-flap-4.png'
+    }, 110);
+    setTimeout(() => {
+        bird.src = './assets/visual/animation/bird-flap-5.png'
+    }, 140);
+    setTimeout(() => {
+        bird.src = './assets/visual/animation/bird-flap-4.png'
+    }, 180);
+    setTimeout(() => {
+        bird.src = './assets/visual/bird.png'
+    }, 200);
+
     velocity = -9.5;
 }
 
