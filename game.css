@@ -30,12 +30,21 @@ body {
 	left: 50%;
 	transform: translate(-50%, -50%);
 
-	height: 200px;
-	width: 350px;
+	height: auto;
+	width: 300px;
 
 	border-radius: 20px;
 	background-color: rgba(255, 255, 255, 0.5);
 	padding: 2rem;
+}
+
+.start-message h2 {
+	font-size: 75%;
+	margin: 30px;
+}
+
+.start-message h3 {
+	font-size: 55%;
 }
 
 .game-over {
