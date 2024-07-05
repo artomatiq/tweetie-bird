@@ -108,6 +108,11 @@ body {
 	letter-spacing: 5px;
 }
 
+.high-score-stay {
+	font-size: 20px;
+	letter-spacing: 5px;
+}
+
 .bird {
 	display: none;
 	position: absolute;
