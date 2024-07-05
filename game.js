@@ -119,30 +119,38 @@ function startGravity () {
 
 function jump () {
 
+    const x = 32;
+
     setTimeout(() => {
         bird.src = './assets/visual/animation/bird-flap-1.PNG'
-    }, 0);
+    }, 0 * x);
     setTimeout(() => {
         bird.src = './assets/visual/animation/bird-flap-2.PNG'
-    }, 30);
+    }, 1 * x);
     setTimeout(() => {
         bird.src = './assets/visual/animation/bird-flap-3.png'
-    }, 60);
+    }, 2 * x);
     setTimeout(() => {
-        bird.src = './assets/visual/animation/bird-flap-0.png'
-    }, 100);
+        bird.src = './assets/visual/animation/bird-flap-2.png'
+    }, 3 * x);
     setTimeout(() => {
-        bird.src = './assets/visual/animation/bird-flap-4.png'
-    }, 110);
+        bird.src = './assets/visual/animation/bird-flap-1.png'
+    }, 4 * x);
     setTimeout(() => {
-        bird.src = './assets/visual/animation/bird-flap-5.png'
-    }, 140);
+        bird.src = './assets/visual/animation/bird-flap-2.PNG'
+    }, 5 * x);
     setTimeout(() => {
-        bird.src = './assets/visual/animation/bird-flap-4.png'
-    }, 180);
+        bird.src = './assets/visual/animation/bird-flap-3.PNG'
+    }, 6 * x);
+    setTimeout(() => {
+        bird.src = './assets/visual/animation/bird-flap-2.png'
+    }, 7 * x);
+    setTimeout(() => {
+        bird.src = './assets/visual/animation/bird-flap-1.png'
+    }, 8 * x);
     setTimeout(() => {
         bird.src = './assets/visual/bird.png'
-    }, 200);
+    }, 9 * x);
 
     velocity = -9.5;
 }
