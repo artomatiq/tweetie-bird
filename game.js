@@ -3,6 +3,8 @@ window.onload = () => {
 };
 const scoreBox = document.querySelector('.score');
 const scoreValue = document.querySelector('.score-value');
+const highScorePlay = document.querySelector('.high-score-play');
+const highScoreCrash = document.querySelector('.high-score-crash')
 const bird = document.querySelector('.bird');
 const startMessage = document.querySelector('.start-message');
 const readyMessage = document.querySelector('.ready-message');
@@ -28,11 +30,18 @@ const loops = {
 }
 
 let score = 0;
+let highScore = 0
+//use local storage to track high score
+if (!localStorage.getItem('highScore')) {
+    localStorage.setItem('highScore', '0')
+}
+
 let mode = gameStates.start;
 
 document.addEventListener('keydown', handleEnter);
-
-
+window.addEventListener('beforeunload', function() {
+    localStorage.clear();
+});
 
 
 
@@ -97,6 +106,10 @@ function trackScoreInterval () {
             document.querySelectorAll('.ships').forEach(ship => {
                 if (parseInt(getComputedStyle(ship).left) < parseInt(getComputedStyle(bird).left) && !ship.isScored) {
                     score++;
+                    if ( JSON.parse(localStorage.getItem('highScore')) < score ) {
+                        highScorePlay.textContent = `High: ${score}`;
+                        localStorage.setItem('highScore', `${score}`)
+                    }
                     scoreValue.textContent = score;
                     ship.isScored = true;
                 }
@@ -250,7 +263,6 @@ function startGame () {
 }
 
 function endGame () {
-    console.log('end game triggered. The score is: ', score)
     mode = gameStates.crash;
 
     clearIntervalsAndAnimations();
@@ -258,6 +270,9 @@ function endGame () {
     //show final score
     const finalScore = document.querySelector('.final-score');
     finalScore.textContent = `Your Score: ${score}`;
+
+    //show high score
+    highScoreCrash.textContent = `High Score: ${localStorage.getItem('highScore')}`
 
     //reset values
     resetValues();
