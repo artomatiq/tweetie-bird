@@ -1,44 +1,51 @@
+//loading
 window.onload = () => {
     document.body.style.visibility = 'visible';
 };
+//score
 const scoreBox = document.querySelector('.score');
 const scoreValue = document.querySelector('.score-value');
 const highScorePlay = document.querySelector('.high-score-play');
 const highScoreCrash = document.querySelector('.high-score-crash')
+//sprites
 const bird = document.querySelector('.bird');
+const ship = document.querySelector('#ships1');
+const surprisedElon = document.querySelector('.surprised-elon');
+const laughingElon = document.querySelector('.laughing-elon');
+//message boxes
 const startMessage = document.querySelector('.start-message');
 const readyMessage = document.querySelector('.ready-message');
 const gameOverMessage = document.querySelector('.game-over');
-const ship = document.querySelector('#ships1');
+//game states
 const gameStates = {
     start: 'start',
     ready: 'ready',
     play: 'play',
     crash: 'crash'
 }
-let velocity = 0;
-const gravityConstant = 0.6;
-
 const loops = {
+    //interval IDs
     generateShipsInterval: null,
     trackScoreInterval: null,
     listenForCrashInterval: null,
     clearShipsInterval: null,
-
+    //animation IDs
     slideShipsAnimation: null,
     gravityAnimation: null,
 }
-
+//constants and variables
+let velocity = 0;
+const gravityConstant = 0.6;
 let score = 0;
 let highScore = 0
+let mode = gameStates.start;
 //use local storage to track high score
 if (!localStorage.getItem('highScore')) {
     localStorage.setItem('highScore', '0')
 }
-
-let mode = gameStates.start;
-
+//listen for enter button
 document.addEventListener('keydown', handleEnter);
+//clear local storage on reload
 window.addEventListener('beforeunload', function() {
     localStorage.clear();
 });
@@ -324,4 +331,8 @@ function clearIntervalsAndAnimations() {
         cancelAnimationFrame(loops.slideShipsAnimation);
         loops.slideShipsAnimation = null;
     }
+}
+
+function runSurprisedElon () {
+
 }

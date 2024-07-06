@@ -179,3 +179,33 @@ body {
 	width: 20%;
 	height: 100%;
 }
+
+
+
+.surprised-elon {
+	position: absolute;
+	width: 8rem;
+	left: 12%;
+	top: 50%;
+	transform: translateY(-50%);
+
+	display: none;
+}
+
+.surprised-elon img {
+	width: 100%;
+}
+
+.laughing-elon {
+	width: 5rem;
+	position: absolute;
+	right: 13%;
+	top: 75%;
+	transform: translateY(-50%) rotate(10deg);
+
+	display: none;
+}
+
+.laughing-elon img {
+	width: 100%;
+}
