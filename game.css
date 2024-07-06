@@ -53,7 +53,7 @@ body {
 	text-align: center;
 	top: 50%;
 	left: 50%;
-	transform: translate(-50%, -50%); 
+	transform: translate(-50%, -50%);
 
 	border-radius: 20px;
 	background-color: rgba(255, 255, 255, 0.5);
@@ -66,7 +66,7 @@ body {
 	text-align: center;
 	top: 70%;
 	left: 50%;
-	transform: translate(-50%, -50%); 
+	transform: translate(-50%, -50%);
 
 	border-radius: 20px;
 	background-color: rgba(255, 255, 255, 0.5);
@@ -83,18 +83,18 @@ body {
 
 .score {
 	display: none;
-    position: absolute;
-    top: 2rem;
-    right: 3rem;
+	position: absolute;
+	top: 2rem;
+	right: 3rem;
 	color: rgb(0, 0, 0);
-    background-color: rgb(255, 255, 255);
-    padding: 1px 10px 10px; 
-    border-radius: 20px; 
-    letter-spacing: 2px; 
-    box-shadow: 0 0 10px 10px #fff, 
-                0 0 20px 10px #fff,
-                0 0 30px 15px #fff; 
-    border: none; 
+	background-color: rgb(255, 255, 255);
+	padding: 1px 10px 10px;
+	border-radius: 20px;
+	letter-spacing: 2px;
+	box-shadow: 0 0 10px 10px #fff,
+		0 0 20px 10px #fff,
+		0 0 30px 15px #fff;
+	border: none;
 	z-index: 50;
 }
 
@@ -131,10 +131,9 @@ body {
 	left: 100%;
 }
 
-.ship-gap {
-}
+.ship-gap {}
 
-.ships > .top {
+.ships>.top {
 	position: relative;
 	top: 0;
 	display: flex;
@@ -142,7 +141,7 @@ body {
 	align-items: flex-start;
 }
 
-.ships > .bottom {
+.ships>.bottom {
 	position: relative;
 	bottom: 0;
 	display: flex;
@@ -186,8 +185,8 @@ body {
 	position: absolute;
 	width: 8rem;
 	left: 12%;
-	top: 50%;
-	transform: translateY(-50%);
+	top: 35%;
+	transform-origin: center center;
 
 	display: none;
 }
@@ -197,15 +196,43 @@ body {
 }
 
 .laughing-elon {
-	width: 5rem;
+	width: 8rem;
 	position: absolute;
-	right: 13%;
-	top: 75%;
-	transform: translateY(-50%) rotate(10deg);
+	right: 7%;
+	top: 45%;
 
 	display: none;
 }
 
 .laughing-elon img {
 	width: 100%;
+}
+
+.surprised-elon.animate {
+	display: block;
+	animation: shake 0.85s ease-in-out 1;
+}
+
+.laughing-elon.animate {
+	display: block;
+	animation: shake 0.5s ease-in-out 2;
+}
+
+@keyframes shake {
+
+	0%, 100% {
+		transform: rotate(0deg);
+	}
+
+	25% {
+		transform: rotate(-10deg);
+	}
+
+	50% {
+		transform: rotate(10deg);
+	}
+
+	75% {
+		transform: rotate(-10deg);
+	}
 }

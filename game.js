@@ -37,7 +37,7 @@ const loops = {
 let velocity = 0;
 const gravityConstant = 0.6;
 let score = 0;
-let highScore = 0
+let surpriseCounter = 0
 let mode = gameStates.start;
 //use local storage to track high score
 if (!localStorage.getItem('highScore')) {
@@ -49,7 +49,6 @@ document.addEventListener('keydown', handleEnter);
 window.addEventListener('beforeunload', function() {
     localStorage.clear();
 });
-
 
 
 function handleEnter (e) {
@@ -116,6 +115,9 @@ function trackScoreInterval () {
                     if ( JSON.parse(localStorage.getItem('highScore')) < score ) {
                         highScorePlay.textContent = `High: ${score}`;
                         localStorage.setItem('highScore', `${score}`)
+                    }
+                    if ( JSON.parse(localStorage.getItem('highScore')) >= 1 + surpriseCounter * 3 ) {
+                        runSurprisedElon();
                     }
                     scoreValue.textContent = score;
                     ship.isScored = true;
@@ -301,6 +303,7 @@ function resetValues () {
     velocity = 0;
     bird.style.top = '50vh';
     score = 0;
+    surpriseCounter = 0;
     scoreValue.textContent = 0;
 }
 
@@ -334,5 +337,11 @@ function clearIntervalsAndAnimations() {
 }
 
 function runSurprisedElon () {
-
+    surpriseCounter++;
+    surprisedElon.style.display = 'block';
+    surprisedElon.classList.add('animate');
+    setTimeout(() => {
+        surprisedElon.classList.remove = 'animate';
+        surprisedElon.style.display = 'none';
+    }, 1000)
 }
