@@ -98,7 +98,8 @@ function listenForCrashInterval () {
                     || 
                     //bird crashes with window
                     birdBox.top < 0 || birdBox.bottom > window.innerHeight
-                ) {
+                ) {     
+                        runLaughingElon();
                         endGame();
                     }
             })
@@ -116,7 +117,7 @@ function trackScoreInterval () {
                         highScorePlay.textContent = `High: ${score}`;
                         localStorage.setItem('highScore', `${score}`)
                     }
-                    if ( JSON.parse(localStorage.getItem('highScore')) >= 1 + surpriseCounter * 3 ) {
+                    if ( JSON.parse(localStorage.getItem('highScore')) >= 2 + surpriseCounter * 3 ) {
                         runSurprisedElon();
                     }
                     scoreValue.textContent = score;
@@ -271,32 +272,34 @@ function startGame () {
     listenForCrashInterval();
 }
 
-function endGame () {
+async function endGame () {
     mode = gameStates.crash;
 
-    clearIntervalsAndAnimations();
-
-    //show final score
-    const finalScore = document.querySelector('.final-score');
-    finalScore.textContent = `Your Score: ${score}`;
-
-    //show high score
-    highScoreCrash.textContent = `High Score: ${localStorage.getItem('highScore')}`
-
-    //reset values
-    resetValues();
-
-    //remove the jump event listener 
-    document.removeEventListener('keydown', handleSpace);
-    
-    gameOverMessage.style.display = 'block';
+    //hide objects
     scoreBox.style.display = 'none';
     bird.style.display = 'none';
 
+    clearIntervalsAndAnimations();   
+    
     //clear all ships
     document.querySelectorAll('.ships').forEach(shipPair => {
         shipPair.remove();
     })
+
+    //remove the jump event listener 
+    document.removeEventListener('keydown', handleSpace);
+
+    //run laughing elon
+    await runLaughingElon();
+
+    //show game over message
+    const finalScore = document.querySelector('.final-score');
+    finalScore.textContent = `Your Score: ${score}`;
+    highScoreCrash.textContent = `High Score: ${localStorage.getItem('highScore')}`
+    gameOverMessage.style.display = 'block';
+
+    //reset values
+    resetValues();
 }
 
 function resetValues () {
@@ -336,6 +339,8 @@ function clearIntervalsAndAnimations() {
     }
 }
 
+// laughingElon.style.display = 'block';
+
 function runSurprisedElon () {
     surpriseCounter++;
     surprisedElon.style.display = 'block';
@@ -344,4 +349,16 @@ function runSurprisedElon () {
         surprisedElon.classList.remove = 'animate';
         surprisedElon.style.display = 'none';
     }, 1000)
+}
+
+function runLaughingElon () {
+    return new Promise ((resolve) => {
+        laughingElon.style.display = 'block';
+        laughingElon.classList.add('animate');
+        setTimeout(() => {
+            laughingElon.classList.remove = 'animate';
+            laughingElon.style.display = 'none';
+            resolve();
+        }, 1000)
+    })
 }

@@ -189,6 +189,7 @@ body {
 	transform-origin: center center;
 
 	display: none;
+	z-index: 100;
 }
 
 .surprised-elon img {
@@ -198,10 +199,11 @@ body {
 .laughing-elon {
 	width: 8rem;
 	position: absolute;
-	right: 7%;
-	top: 45%;
+	right: 12%;
+	top: 60%;
 
 	display: none;
+	z-index: 100;
 }
 
 .laughing-elon img {
@@ -215,7 +217,7 @@ body {
 
 .laughing-elon.animate {
 	display: block;
-	animation: shake 0.5s ease-in-out 2;
+	animation: shake 0.85s ease-in-out 2;
 }
 
 @keyframes shake {
@@ -235,4 +237,15 @@ body {
 	75% {
 		transform: rotate(-10deg);
 	}
+}
+
+.thought img {
+	position: absolute;
+	width: 11rem;
+	right: 0;
+	top: 25%;
+	transform-origin: center center;
+
+	display: none;
+	z-index: 100;
 }
