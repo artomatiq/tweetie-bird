@@ -249,3 +249,107 @@ body {
 	display: none;
 	z-index: 100;
 }
+
+@media screen and (max-width: 1024px) and (min-width: 768px) {
+    .surprised-elon {
+		position: absolute;
+		width: 6rem;
+		left: 12%;
+		top: 35%;
+		transform-origin: center center;
+	
+		display: none;
+		z-index: 100;
+	}
+	
+	.surprised-elon img {
+		width: 100%;
+	}
+	
+	.laughing-elon {
+		width: 6rem;
+		position: absolute;
+		right: 12%;
+		top: 60%;
+	
+		display: none;
+		z-index: 100;
+	}
+	
+	.laughing-elon img {
+		width: 100%;
+	}
+	
+	.surprised-elon.animate {
+		display: block;
+		animation: shake 0.85s ease-in-out 1;
+	}
+	
+	.laughing-elon.animate {
+		display: block;
+		animation: shake 1s ease-in-out 2;
+	}
+
+	.thought img {
+		position: absolute;
+		width: 8rem;
+		right: 0;
+		top: 25%;
+		transform-origin: center center;
+	
+		display: none;
+		z-index: 100;
+	}
+}
+
+@media screen and (max-width: 768px) {
+    .surprised-elon {
+		position: absolute;
+		width: 5rem;
+		left: 0;
+		top: 35%;
+		transform-origin: center center;
+	
+		display: none;
+		z-index: 100;
+	}
+	
+	.surprised-elon img {
+		width: 100%;
+	}
+	
+	.laughing-elon {
+		width: 5rem;
+		position: absolute;
+		right: 12%;
+		top: 45%;
+	
+		display: none;
+		z-index: 100;
+	}
+	
+	.laughing-elon img {
+		width: 100%;
+	}
+	
+	.surprised-elon.animate {
+		display: block;
+		animation: shake 0.85s ease-in-out 1;
+	}
+	
+	.laughing-elon.animate {
+		display: block;
+		animation: shake 1s ease-in-out 2;
+	}
+
+	.thought img {
+		position: absolute;
+		width: 6rem;
+		right: 0;
+		top: 25%;
+		transform-origin: center center;
+	
+		display: none;
+		z-index: 100;
+	}
+}
