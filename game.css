@@ -251,6 +251,11 @@ body {
 }
 
 @media screen and (max-width: 1024px) and (min-width: 768px) {
+	* {
+		font-size: 25px;
+		letter-spacing: 6px;
+	}
+
     .surprised-elon {
 		position: absolute;
 		width: 6rem;
@@ -302,7 +307,8 @@ body {
 	}
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 500px) {
+
     .surprised-elon {
 		position: absolute;
 		width: 5rem;
