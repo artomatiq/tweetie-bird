@@ -1,23 +1,19 @@
-# Flappy Bird Clone
+## Tweety Bird: The X-scape
 
-This project is a clone of the popular game Flappy Bird, developed using HTML, CSS and JavaScript. It aims to replicate the addictive gameplay of guiding a bird through a series of obstacles by tapping the screen to keep it airborne.
+This project is a Twitter vs Elon Musk's X rivalry themed clone of the popular game Flappy Bird—developed using HTML, CSS and JavaScript. 
 
+It aims to replicate Flappy Bird's addictive gameplay of guiding a bird through a series of obstacles by tapping/pressing to keep it airborne.
 
-
-## Features
-
-- Simple, intuitive controls: Tap to flap!
-- Gradually increasing difficulty.
-- Sound effects that enhance the gaming experience.
+In this version, the bird is the Twitter logo, while the obstacles are Space-X's Starships. The game is naturally set in the Martian landscape, with blue Earth towering over the horizon. 
 
 
 
 ## How to Play
 
 1. Run the game from your Browser.
-2. Click or tap on the screen to start the game.
-3. Tap the screen to make the bird flap its wings and rise.
-4. Avoid the pipes by flying through the gaps.
+2. Press Enter to start the game.
+3. Press Space to make the bird flap its wings and rise.
+4. Avoid the Starhip obstacles by flying through the gaps.
 5. Try to get the highest score possible!
 
 
@@ -45,3 +41,8 @@ To run the game on your local machine, follow these steps:
         - On Linux:
             bash
             google-chrome index.html
+
+
+
+
+## Thank you and don't forget to have fun!
