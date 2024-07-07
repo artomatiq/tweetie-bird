@@ -217,7 +217,7 @@ body {
 
 .laughing-elon.animate {
 	display: block;
-	animation: shake 0.85s ease-in-out 2;
+	animation: shake 1s ease-in-out 2;
 }
 
 @keyframes shake {

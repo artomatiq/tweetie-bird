@@ -12,6 +12,7 @@ const bird = document.querySelector('.bird');
 const ship = document.querySelector('#ships1');
 const surprisedElon = document.querySelector('.surprised-elon');
 const laughingElon = document.querySelector('.laughing-elon');
+const thoughtImg = document.querySelector('.thought img');
 //message boxes
 const startMessage = document.querySelector('.start-message');
 const readyMessage = document.querySelector('.ready-message');
@@ -339,8 +340,6 @@ function clearIntervalsAndAnimations() {
     }
 }
 
-// laughingElon.style.display = 'block';
-
 function runSurprisedElon () {
     surpriseCounter++;
     surprisedElon.style.display = 'block';
@@ -355,10 +354,34 @@ function runLaughingElon () {
     return new Promise ((resolve) => {
         laughingElon.style.display = 'block';
         laughingElon.classList.add('animate');
+
+        runThoughtCloud();
+
         setTimeout(() => {
             laughingElon.classList.remove = 'animate';
             laughingElon.style.display = 'none';
             resolve();
-        }, 1000)
+        }, 2900)
     })
+
+
+    function runThoughtCloud () {
+
+        thoughtImg.src = './assets/visual/thought/thought-1.png'
+        thoughtImg.style.display = 'block';
+        
+        setTimeout(() => {
+            thoughtImg.src = './assets/visual/thought/thought-2.png'
+        }, 250);
+        setTimeout(() => {
+            thoughtImg.src = './assets/visual/thought/thought-3.png'
+        }, 500);
+        setTimeout(() => {
+            thoughtImg.src = './assets/visual/thought/thought-4.png'
+        }, 850);
+        setTimeout(() => {
+            thoughtImg.style.display = 'none';
+        }, 2900);
+
+    }
 }
