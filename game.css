@@ -81,6 +81,10 @@ body {
 	font-size: 75%;
 }
 
+.game-over img {
+	width: 100px;
+}
+
 .score {
 	display: none;
 	position: absolute;
@@ -250,10 +254,22 @@ body {
 	z-index: 100;
 }
 
-@media screen and (max-width: 1024px) and (min-width: 768px) {
-	* {
-		font-size: 25px;
-		letter-spacing: 6px;
+@media screen and (max-width: 850px) and (min-width: 500px) {
+
+	.game-over {
+		width: 375px;
+	}
+
+	.game-over h1 {
+		font-size: 4vh;
+	}
+	
+	.game-over h2 {
+		font-size: 65%;
+	}
+	
+	.game-over img {
+		width: 85px;
 	}
 
     .surprised-elon {
@@ -275,7 +291,7 @@ body {
 		width: 6rem;
 		position: absolute;
 		right: 12%;
-		top: 60%;
+		top: 50%;
 	
 		display: none;
 		z-index: 100;
@@ -308,6 +324,22 @@ body {
 }
 
 @media screen and (max-width: 500px) {
+
+	.game-over {
+		width: 200px;
+	}
+
+	.game-over h1 {
+		font-size: 3vh;
+	}
+	
+	.game-over h2 {
+		font-size: 50%;
+	}
+	
+	.game-over img {
+		width: 75px;
+	}
 
     .surprised-elon {
 		position: absolute;
