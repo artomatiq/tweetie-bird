@@ -102,7 +102,6 @@ function listenForCrashInterval () {
                     //bird crashes with window
                     birdBox.top < 0 || birdBox.bottom > window.innerHeight
                 ) {     
-                        clearInterval(loops.runSurprisedElon)
                         runLaughingElon();
                         endGame();
                     }
