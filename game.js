@@ -58,7 +58,7 @@ function handleEnter (e) {
     if (e.key === 'Enter') {
         if (mode === gameStates.play) return
         if (laughingElon.style.display === 'block') return
-        
+
         if (mode === gameStates.start) {
             getReady();
         }

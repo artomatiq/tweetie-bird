@@ -136,8 +136,6 @@ body {
 	left: 100%;
 }
 
-.ship-gap {}
-
 .ships>.top {
 	position: relative;
 	top: 0;
@@ -204,8 +202,8 @@ body {
 .laughing-elon {
 	width: 8rem;
 	position: absolute;
-	right: 12%;
-	top: 60%;
+	right: 50%;
+	top: 50%;
 
 	display: none;
 	z-index: 100;
@@ -242,6 +240,13 @@ body {
 	75% {
 		transform: rotate(-10deg);
 	}
+}
+
+.thought {
+	right: 20vw;
+	top: 50vh;
+
+	z-index: 100;
 }
 
 .thought img {
@@ -315,7 +320,7 @@ body {
 	.thought img {
 		position: absolute;
 		width: 8rem;
-		right: 0;
+		right: 5%;
 		top: 25%;
 		transform-origin: center center;
 	
