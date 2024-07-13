@@ -30,6 +30,8 @@ const loops = {
     trackScoreInterval: null,
     listenForCrashInterval: null,
     clearShipsInterval: null,
+    runLaughingElon: null,
+    runSurprisedElon: null,
     //animation IDs
     slideShipsAnimation: null,
     gravityAnimation: null,
@@ -344,7 +346,7 @@ function runSurprisedElon () {
     surpriseCounter++;
     surprisedElon.style.display = 'block';
     surprisedElon.classList.add('animate');
-    setTimeout(() => {
+    loops.runSurprisedElon = setTimeout(() => {
         surprisedElon.classList.remove = 'animate';
         surprisedElon.style.display = 'none';
     }, 1000)
@@ -352,12 +354,14 @@ function runSurprisedElon () {
 
 function runLaughingElon () {
     return new Promise ((resolve) => {
+        clearInterval(loops.runSurprisedElon);
+
         laughingElon.style.display = 'block';
         laughingElon.classList.add('animate');
 
         runThoughtCloud();
 
-        setTimeout(() => {
+        loops.runLaughingElon = setTimeout(() => {
             laughingElon.classList.remove = 'animate';
             laughingElon.style.display = 'none';
             resolve();
