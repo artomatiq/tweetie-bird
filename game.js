@@ -102,6 +102,7 @@ function listenForCrashInterval () {
                     //bird crashes with window
                     birdBox.top < 0 || birdBox.bottom > window.innerHeight
                 ) {     
+                        clearInterval(loops.runSurprisedElon)
                         runLaughingElon();
                         endGame();
                     }
@@ -346,7 +347,7 @@ function runSurprisedElon () {
     surpriseCounter++;
     surprisedElon.style.display = 'block';
     surprisedElon.classList.add('animate');
-    loops.runSurprisedElon = setTimeout(() => {
+    setTimeout(() => {
         surprisedElon.classList.remove = 'animate';
         surprisedElon.style.display = 'none';
     }, 1000)
@@ -354,14 +355,14 @@ function runSurprisedElon () {
 
 function runLaughingElon () {
     return new Promise ((resolve) => {
-        clearInterval(loops.runSurprisedElon);
+        surprisedElon.style.display = 'none';
 
         laughingElon.style.display = 'block';
         laughingElon.classList.add('animate');
 
         runThoughtCloud();
 
-        loops.runLaughingElon = setTimeout(() => {
+        setTimeout(() => {
             laughingElon.classList.remove = 'animate';
             laughingElon.style.display = 'none';
             resolve();
