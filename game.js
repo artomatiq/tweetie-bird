@@ -22,7 +22,7 @@ const gameStates = {
     start: 'start',
     ready: 'ready',
     play: 'play',
-    crash: 'crash'
+    crash: 'crash',
 }
 const loops = {
     //interval IDs
@@ -57,6 +57,8 @@ window.addEventListener('beforeunload', function() {
 function handleEnter (e) {
     if (e.key === 'Enter') {
         if (mode === gameStates.play) return
+        if (laughingElon.style.display === 'block') return
+        
         if (mode === gameStates.start) {
             getReady();
         }
@@ -102,6 +104,7 @@ function listenForCrashInterval () {
                     //bird crashes with window
                     birdBox.top < 0 || birdBox.bottom > window.innerHeight
                 ) {     
+
                         runLaughingElon();
                         endGame();
                     }
