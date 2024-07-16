@@ -12,7 +12,7 @@ const bird = document.querySelector('.bird');
 const ship = document.querySelector('#ships1');
 const surprisedElon = document.querySelector('.surprised-elon');
 const laughingElon = document.querySelector('.laughing-elon');
-const thoughtImg = document.querySelector('.thought img');
+const thoughtImg = document.querySelector('.thought');
 //message boxes
 const startMessage = document.querySelector('.start-message');
 const readyMessage = document.querySelector('.ready-message');
@@ -42,6 +42,10 @@ const gravityConstant = 0.6;
 let score = 0;
 let surpriseCounter = 0
 let mode = gameStates.start;
+
+// laughingElon.style.display = 'block'
+// thoughtImg.style.display = 'block'
+
 //use local storage to track high score
 if (!localStorage.getItem('highScore')) {
     localStorage.setItem('highScore', '0')

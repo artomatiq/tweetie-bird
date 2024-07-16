@@ -15,6 +15,8 @@ body {
 
 .background {
 	position: relative;
+	display: flex;
+	flex-direction: column;
 	width: 100vw;
 	height: 100vh;
 	background-image: url('./assets/visual/background.png');
@@ -75,7 +77,7 @@ body {
 }
 
 .game-over h1 {
-	font-size: 5vh;
+	font-size: 100%;
 }
 
 .game-over h2 {
@@ -199,18 +201,32 @@ body {
 	width: 100%;
 }
 
-.laughing-elon {
-	width: 8rem;
-	position: absolute;
-	right: 50%;
-	top: 50%;
+.laughing-duo {
+	display: grid;
+	position: relative;
+	grid-template-rows: 2fr 1fr;
+	align-self: center;
+	margin: auto;
+	width: 50vmin;
+}
 
+.laughing-elon {
+	width: 25vmin;
 	display: none;
 	z-index: 100;
 }
 
 .laughing-elon img {
 	width: 100%;
+}
+
+.thought {
+	width: 45vmin;
+	align-self: flex-end;
+	justify-self: flex-end;
+
+	display: none;
+	z-index: 100;
 }
 
 .surprised-elon.animate {
@@ -242,23 +258,13 @@ body {
 	}
 }
 
-.thought {
-	right: 20vw;
-	top: 50vh;
 
-	z-index: 100;
-}
 
-.thought img {
-	position: absolute;
-	width: 11rem;
-	right: 0;
-	top: 25%;
-	transform-origin: center center;
 
-	display: none;
-	z-index: 100;
-}
+
+
+
+
 
 @media screen and (max-width: 850px) and (min-width: 500px) {
 
@@ -267,7 +273,7 @@ body {
 	}
 
 	.game-over h1 {
-		font-size: 4vh;
+		font-size: 85%;
 	}
 	
 	.game-over h2 {
@@ -292,42 +298,30 @@ body {
 	.surprised-elon img {
 		width: 100%;
 	}
+
+	.laughing-duo {
+		width: 60vmin;
+	}
 	
 	.laughing-elon {
-		width: 6rem;
-		position: absolute;
-		right: 12%;
-		top: 50%;
-	
-		display: none;
-		z-index: 100;
+		width: 28vmin;
 	}
 	
-	.laughing-elon img {
-		width: 100%;
-	}
-	
-	.surprised-elon.animate {
-		display: block;
-		animation: shake 0.85s ease-in-out 1;
-	}
-	
-	.laughing-elon.animate {
-		display: block;
-		animation: shake 1s ease-in-out 2;
-	}
-
-	.thought img {
-		position: absolute;
-		width: 8rem;
-		right: 5%;
-		top: 25%;
-		transform-origin: center center;
-	
-		display: none;
-		z-index: 100;
+	.thought {
+		width: 48vmin;
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
 
 @media screen and (max-width: 500px) {
 
@@ -336,7 +330,7 @@ body {
 	}
 
 	.game-over h1 {
-		font-size: 3vh;
+		font-size: 75%;
 	}
 	
 	.game-over h2 {
@@ -361,39 +355,16 @@ body {
 	.surprised-elon img {
 		width: 100%;
 	}
+
+	.laughing-duo {
+		width: 70vmin;
+	}
 	
 	.laughing-elon {
-		width: 5rem;
-		position: absolute;
-		right: 12%;
-		top: 45%;
-	
-		display: none;
-		z-index: 100;
+		width: 40vmin;
 	}
 	
-	.laughing-elon img {
-		width: 100%;
-	}
-	
-	.surprised-elon.animate {
-		display: block;
-		animation: shake 0.85s ease-in-out 1;
-	}
-	
-	.laughing-elon.animate {
-		display: block;
-		animation: shake 1s ease-in-out 2;
-	}
-
-	.thought img {
-		position: absolute;
-		width: 6rem;
-		right: 0;
-		top: 25%;
-		transform-origin: center center;
-	
-		display: none;
-		z-index: 100;
+	.thought {
+		width: 55vmin;
 	}
 }
