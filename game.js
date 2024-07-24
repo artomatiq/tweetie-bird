@@ -28,16 +28,16 @@ const birdFinal = new Image();
 birdFinal.src = './assets/visual/bird.png';
 
 const birdFrames = [
-    birdFlap1.src,
-    birdFlap2.src,
-    birdFlap3.src,
-    birdFlap2.src,
-    birdFlap1.src,
-    birdFlap2.src,
-    birdFlap3.src,
-    birdFlap2.src,
-    birdFlap1.src,
-    birdFinal.src
+    birdFlap1,
+    birdFlap2,
+    birdFlap3,
+    birdFlap2,
+    birdFlap1,
+    birdFlap2,
+    birdFlap3,
+    birdFlap2,
+    birdFlap1,
+    birdFinal
 ];
 //game states
 const gameStates = {
@@ -173,7 +173,7 @@ function startGravity () {
 }
 
 function jump () {
-    console.log('jumping 123');
+    console.log('jumping 456');
 
     const x = 32;
 
