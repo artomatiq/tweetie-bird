@@ -19,11 +19,11 @@ const readyMessage = document.querySelector('.ready-message');
 const gameOverMessage = document.querySelector('.game-over');
 //jump-frames
 const birdFlap1 = new Image();
-birdFlap1.src = './assets/visual/animation/bird-flap-1.PNG';
+birdFlap1.src = './assets/visual/animation/bird-flap-1.png';
 const birdFlap2 = new Image();
-birdFlap2.src = './assets/visual/animation/bird-flap-2.PNG';
+birdFlap2.src = './assets/visual/animation/bird-flap-2.png';
 const birdFlap3 = new Image();
-birdFlap3.src = './assets/visual/animation/bird-flap-3.PNG';
+birdFlap3.src = './assets/visual/animation/bird-flap-3.png';
 const birdFinal = new Image();
 birdFinal.src = './assets/visual/bird.png';
 
