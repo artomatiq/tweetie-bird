@@ -173,7 +173,7 @@ function startGravity () {
 }
 
 function jump () {
-    console.log('jumping 456');
+    console.log('jumping 789');
 
     const x = 32;
 
