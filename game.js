@@ -113,14 +113,14 @@ function handleEnter(e) {
 }
 
 function handleTap() {
+    if (mode === gameStates.start) {
+        getReady();
+    }
     if (mode === gameStates.play) {
         jump();
     }
     if (laughingElon.style.display === 'block') return
 
-    if (mode === gameStates.start) {
-        getReady();
-    }
     if (mode === gameStates.crash) {
         getReady();
     }
