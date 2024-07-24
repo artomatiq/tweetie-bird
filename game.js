@@ -8,7 +8,7 @@ const scoreValue = document.querySelector('.score-value');
 const highScorePlay = document.querySelector('.high-score-play');
 const highScoreCrash = document.querySelector('.high-score-crash')
 //sprites
-let bird = document.querySelector('.bird');
+const bird = document.querySelector('.bird');
 const ship = document.querySelector('#ships1');
 const surprisedElon = document.querySelector('.surprised-elon');
 const laughingElon = document.querySelector('.laughing-elon');
