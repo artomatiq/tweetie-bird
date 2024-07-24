@@ -2,6 +2,18 @@
 window.onload = () => {
     document.body.style.visibility = 'visible';
 };
+//mobile configs
+const isMobile = () => {
+    return /Mobi|Android/i.test(navigator.userAgent);
+};
+
+if (isMobile) {
+    const startMessageH3 = document.querySelector('.start-message h3');
+    startMessageH3.textContent = 'Tap to Start';
+
+    const readyMessageH1 = document.querySelector('.ready-message h1');
+    readyMessageH1.textContent = 'Tap to Jump';
+}
 //score
 const scoreBox = document.querySelector('.score');
 const scoreValue = document.querySelector('.score-value');

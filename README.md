@@ -1,6 +1,6 @@
 ## Tweety Bird: The X-scape
 
-This project is a Twitter vs Elon Musk's X rivalry themed clone of the popular game Flappy Bird—developed using HTML, CSS and JavaScript. 
+This project is a ——Twitter vs Elon Musk's X—— rivalry themed clone of the popular game Flappy Bird developed using HTML, CSS and JavaScript. 
 
 It aims to replicate Flappy Bird's addictive gameplay of guiding a bird through a series of obstacles by tapping/pressing to keep it airborne.
 
