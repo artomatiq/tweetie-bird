@@ -17,6 +17,28 @@ const thoughtImg = document.querySelector('.thought');
 const startMessage = document.querySelector('.start-message');
 const readyMessage = document.querySelector('.ready-message');
 const gameOverMessage = document.querySelector('.game-over');
+//jump-frames
+const birdFlap1 = new Image();
+birdFlap1.src = './assets/visual/animation/bird-flap-1.PNG';
+const birdFlap2 = new Image();
+birdFlap2.src = './assets/visual/animation/bird-flap-2.PNG';
+const birdFlap3 = new Image();
+birdFlap3.src = './assets/visual/animation/bird-flap-3.PNG';
+const birdFinal = new Image();
+birdFinal.src = './assets/visual/bird.png';
+
+const birdFrames = [
+    birdFlap1.src,
+    birdFlap2.src,
+    birdFlap3.src,
+    birdFlap2.src,
+    birdFlap1.src,
+    birdFlap2.src,
+    birdFlap3.src,
+    birdFlap2.src,
+    birdFlap1.src,
+    birdFinal.src
+];
 //game states
 const gameStates = {
     start: 'start',
@@ -154,36 +176,11 @@ function jump () {
 
     const x = 32;
 
-    setTimeout(() => {
-        bird.src = './assets/visual/animation/bird-flap-1.PNG'
-    }, 0 * x);
-    setTimeout(() => {
-        bird.src = './assets/visual/animation/bird-flap-2.PNG'
-    }, 1 * x);
-    setTimeout(() => {
-        bird.src = './assets/visual/animation/bird-flap-3.png'
-    }, 2 * x);
-    setTimeout(() => {
-        bird.src = './assets/visual/animation/bird-flap-2.png'
-    }, 3 * x);
-    setTimeout(() => {
-        bird.src = './assets/visual/animation/bird-flap-1.png'
-    }, 4 * x);
-    setTimeout(() => {
-        bird.src = './assets/visual/animation/bird-flap-2.PNG'
-    }, 5 * x);
-    setTimeout(() => {
-        bird.src = './assets/visual/animation/bird-flap-3.PNG'
-    }, 6 * x);
-    setTimeout(() => {
-        bird.src = './assets/visual/animation/bird-flap-2.png'
-    }, 7 * x);
-    setTimeout(() => {
-        bird.src = './assets/visual/animation/bird-flap-1.png'
-    }, 8 * x);
-    setTimeout(() => {
-        bird.src = './assets/visual/bird.png'
-    }, 9 * x);
+    birdFrames.forEach((frame, index) => {
+        setTimeout(() => {
+            bird.src = frame;
+        }, index * x);
+    });
 
     velocity = -9.5;
 }
