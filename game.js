@@ -173,13 +173,13 @@ function startGravity () {
 }
 
 function jump () {
-    console.log('jumping');
+    console.log('jumping 123');
 
     const x = 32;
 
     birdFrames.forEach((frame, index) => {
         setTimeout(() => {
-            bird.src = frame;
+            bird.src = frame.src;
         }, index * x);
     });
 
