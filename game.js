@@ -81,15 +81,24 @@ let mode = gameStates.start;
 if (!localStorage.getItem('highScore')) {
     localStorage.setItem('highScore', '0')
 }
-//listen for enter button
-document.addEventListener('keydown', handleEnter);
+
+if (isMobile) {
+    //listen for tap
+    document.addEventListener('touchstart', handleTap);
+}
+else {
+    //listen for enter button
+    document.addEventListener('keydown', handleEnter);
+}
+
+
 //clear local storage on reload
-window.addEventListener('beforeunload', function() {
+window.addEventListener('beforeunload', function () {
     localStorage.clear();
 });
 
 
-function handleEnter (e) {
+function handleEnter(e) {
     if (e.key === 'Enter') {
         if (mode === gameStates.play) return
         if (laughingElon.style.display === 'block') return
@@ -103,7 +112,24 @@ function handleEnter (e) {
     }
 }
 
-function handleSpace (e) {
+function handleTap() {
+    if (mode === gameStates.play) {
+        jump();
+    }
+    if (laughingElon.style.display === 'block') return
+
+    if (mode === gameStates.start) {
+        getReady();
+    }
+    if (mode === gameStates.crash) {
+        getReady();
+    }
+    if (mode === gameStates.ready) {
+        startGame();
+    }
+}
+
+function handleSpace(e) {
     if (e.key === ' ') {
         if (mode === gameStates.ready) {
             startGame();
@@ -116,14 +142,14 @@ function handleSpace (e) {
 
 
 
-function generateShipsInterval () {
+function generateShipsInterval() {
     loops.generateShipsInterval = setInterval(() => {
         const randomShip = generateRandomShip();
         document.querySelector('.background').appendChild(randomShip);
     }, 2500);
 }
 
-function listenForCrashInterval () {
+function listenForCrashInterval() {
     loops.listenForCrashInterval = setInterval(() => {
         if (mode === gameStates.play) {
             const birdBox = bird.getBoundingClientRect();
@@ -132,56 +158,57 @@ function listenForCrashInterval () {
                 if (
                     //bird crashes with ship
                     (shipBox.left < birdBox.right &&
-                    shipBox.right > birdBox.left &&
-                    shipBox.top < birdBox.bottom && 
-                    shipBox.bottom > birdBox.top)
-                    || 
+                        shipBox.right > birdBox.left &&
+                        shipBox.top < birdBox.bottom &&
+                        shipBox.bottom > birdBox.top)
+                    ||
                     //bird crashes with window
                     birdBox.top < 0 || birdBox.bottom > window.innerHeight
-                ) {     
+                ) {
 
-                        runLaughingElon();
-                        endGame();
-                    }
+                    runLaughingElon();
+                    endGame();
+                }
             })
         }
     }, 10)
 }
 
-function trackScoreInterval () {
+function trackScoreInterval() {
     loops.trackScoreInterval = setInterval(() => {
         if (mode === gameStates.play) {
             document.querySelectorAll('.ships').forEach(ship => {
                 if (parseInt(getComputedStyle(ship).left) < parseInt(getComputedStyle(bird).left) && !ship.isScored) {
                     score++;
-                    if ( JSON.parse(localStorage.getItem('highScore')) < score ) {
+                    if (JSON.parse(localStorage.getItem('highScore')) < score) {
                         highScorePlay.textContent = `High: ${score}`;
                         localStorage.setItem('highScore', `${score}`)
                     }
-                    if ( JSON.parse(localStorage.getItem('highScore')) >= 2 + surpriseCounter * 3 ) {
+                    if (JSON.parse(localStorage.getItem('highScore')) >= 2 + surpriseCounter * 3) {
                         runSurprisedElon();
                     }
                     scoreValue.textContent = score;
                     ship.isScored = true;
                 }
             }
-        )}
+            )
+        }
     }, 100)
 }
 
-function startGravity () {
-    function gravity () {
+function startGravity() {
+    function gravity() {
         velocity += gravityConstant;
         let position = parseInt(getComputedStyle(bird).top) + velocity;
         bird.style.top = `${position}px`;
-    
+
         loops.gravityAnimation = requestAnimationFrame(gravity);
     }
 
     loops.gravityAnimation = requestAnimationFrame(gravity);
 }
 
-function jump () {
+function jump() {
     const x = 32;
 
     birdFrames.forEach((frame, index) => {
@@ -193,7 +220,7 @@ function jump () {
     velocity = -9.5;
 }
 
-function runShips () {
+function runShips() {
     //create random ship every 5 seconds
     generateShipsInterval();
 
@@ -210,14 +237,14 @@ function runShips () {
     clearShipsInterval();
 }
 
-function generateRandomShip () {
+function generateRandomShip() {
 
     if (mode !== gameStates.play) return;
 
     const gaps = [
-        {up: '100%', down: '100%'} ,
-        {up: '100%', down: '50vh'}, 
-        {up: '50vh', down: '100%'}
+        { up: '100%', down: '100%' },
+        { up: '100%', down: '50vh' },
+        { up: '50vh', down: '100%' }
     ]
     let clone = ship.cloneNode(true);
     let gap = gaps[Math.floor(Math.random() * gaps.length)];
@@ -228,7 +255,7 @@ function generateRandomShip () {
     return clone;
 }
 
-function clearShipsInterval () {
+function clearShipsInterval() {
 
     if (mode !== gameStates.play) return;
 
@@ -241,7 +268,7 @@ function clearShipsInterval () {
     }, 10000)
 }
 
-function getReady () {
+function getReady() {
     mode = gameStates.ready;
     //hide
     startMessage.style.display = 'none';
@@ -254,8 +281,8 @@ function getReady () {
     document.addEventListener('keydown', handleSpace);
 }
 
-function startGame () {
-    
+function startGame() {
+
     mode = gameStates.play;
     //hide
     readyMessage.style.display = 'none';
@@ -287,15 +314,15 @@ function startGame () {
     listenForCrashInterval();
 }
 
-async function endGame () {
+async function endGame() {
     mode = gameStates.crash;
 
     //hide objects
     scoreBox.style.display = 'none';
     bird.style.display = 'none';
 
-    clearIntervalsAndAnimations();   
-    
+    clearIntervalsAndAnimations();
+
     //clear all ships
     document.querySelectorAll('.ships').forEach(shipPair => {
         shipPair.remove();
@@ -317,7 +344,7 @@ async function endGame () {
     resetValues();
 }
 
-function resetValues () {
+function resetValues() {
     velocity = 0;
     bird.style.top = '50vh';
     score = 0;
@@ -354,7 +381,7 @@ function clearIntervalsAndAnimations() {
     }
 }
 
-function runSurprisedElon () {
+function runSurprisedElon() {
     surpriseCounter++;
     surprisedElon.style.display = 'block';
     surprisedElon.classList.add('animate');
@@ -364,8 +391,8 @@ function runSurprisedElon () {
     }, 1000)
 }
 
-function runLaughingElon () {
-    return new Promise ((resolve) => {
+function runLaughingElon() {
+    return new Promise((resolve) => {
         surprisedElon.style.display = 'none';
 
         laughingElon.style.display = 'block';
@@ -381,11 +408,11 @@ function runLaughingElon () {
     })
 
 
-    function runThoughtCloud () {
+    function runThoughtCloud() {
 
         thoughtImg.src = './assets/visual/thought/thought-1.png'
         thoughtImg.style.display = 'block';
-        
+
         setTimeout(() => {
             thoughtImg.src = './assets/visual/thought/thought-2.png'
         }, 250);
