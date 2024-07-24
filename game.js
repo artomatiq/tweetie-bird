@@ -179,7 +179,7 @@ function jump () {
 
     birdFrames.forEach((frame, index) => {
         setTimeout(() => {
-            bird.src = frame.src;
+            bird = frame;
         }, index * x);
     });
 
