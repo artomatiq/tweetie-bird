@@ -8,7 +8,7 @@ const scoreValue = document.querySelector('.score-value');
 const highScorePlay = document.querySelector('.high-score-play');
 const highScoreCrash = document.querySelector('.high-score-crash')
 //sprites
-const bird = document.querySelector('.bird');
+let bird = document.querySelector('.bird');
 const ship = document.querySelector('#ships1');
 const surprisedElon = document.querySelector('.surprised-elon');
 const laughingElon = document.querySelector('.laughing-elon');
@@ -173,7 +173,7 @@ function startGravity () {
 }
 
 function jump () {
-    console.log('jumping 789');
+    console.log('jumping 000');
 
     const x = 32;
 
