@@ -18,14 +18,10 @@ const startMessage = document.querySelector('.start-message');
 const readyMessage = document.querySelector('.ready-message');
 const gameOverMessage = document.querySelector('.game-over');
 //jump-frames
-const birdFlap1 = new Image();
-birdFlap1.src = './assets/visual/animation/bird-flap-1.png';
-const birdFlap2 = new Image();
-birdFlap2.src = './assets/visual/animation/bird-flap-2.png';
-const birdFlap3 = new Image();
-birdFlap3.src = './assets/visual/animation/bird-flap-3.png';
-const birdFinal = new Image();
-birdFinal.src = './assets/visual/bird.png';
+const birdFlap1 = birdFlap1Data;
+const birdFlap2 = birdFlap2Data;
+const birdFlap3 = birdFlap3Data;
+const birdFinal = birdFinalData;
 
 const birdFrames = [
     birdFlap1,
@@ -39,6 +35,7 @@ const birdFrames = [
     birdFlap1,
     birdFinal
 ];
+
 //game states
 const gameStates = {
     start: 'start',
@@ -173,13 +170,11 @@ function startGravity () {
 }
 
 function jump () {
-    console.log('jumping 000');
-
     const x = 32;
 
     birdFrames.forEach((frame, index) => {
         setTimeout(() => {
-            bird = frame;
+            bird.src = frame;
         }, index * x);
     });
 
