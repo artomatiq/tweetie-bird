@@ -324,12 +324,13 @@ body {
 
 
 @media screen and (max-width: 500px) {
-	.body{
-		height: 90vh;
+
+	body{
+		height: 85vh;
 	}
 
 	.background {
-		height: 90vh;
+		height: 85vh;
 	}
 
 	.game-over {
