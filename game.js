@@ -395,6 +395,7 @@ function clearIntervalsAndAnimations() {
 }
 
 function runSurprisedElon() {
+    if (isMobile()) return
     surpriseCounter++;
     surprisedElon.style.display = 'block';
     surprisedElon.classList.add('animate');
