@@ -437,7 +437,7 @@ body {
 
 	.ships {
 		position: absolute;
-		grid-template-rows: auto 15vh auto;
+		grid-template-rows: auto 17vh auto;
 		height: 85vh;
 		width: 10vh;
 		left: 100%;
