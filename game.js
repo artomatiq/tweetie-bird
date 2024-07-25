@@ -17,7 +17,7 @@ if (isMobile()) {
     const readyMessageH1 = document.querySelector('.ready-message h1');
     readyMessageH1.textContent = 'Tap to Jump';
 
-    const restartMessageH2 = document.querySelector('.restart-message h2');
+    const restartMessageH2 = document.querySelector('.restart-message');
     restartMessageH2.textContent = 'Tap to Restart';
 }
 //score
