@@ -120,6 +120,11 @@ body {
 	letter-spacing: 5px;
 }
 
+.high-score-play {
+	font-size: 20px;
+	letter-spacing: 5px;
+}
+
 .bird {
 	display: none;
 	position: absolute;
@@ -320,12 +325,10 @@ body {
 
 
 
-
-
-
 @media screen and (max-width: 500px) {
 	html {
 		height: 85vh;
+		position: relative;
 	}
 
 	body{
@@ -334,6 +337,59 @@ body {
 
 	.background {
 		height: 85vh;
+	}
+
+	.start-message {
+		width: 200px;
+		padding: none;
+	}
+	
+	.start-message h2 {
+		font-size: 55%;
+		padding: 0;
+		margin: 0;
+		margin-top: 1rem;
+	}
+	
+	.start-message h3 {
+		font-size: 55%;
+	}
+
+	.ready-message h1{
+		font-size: 0.5rem;
+	}
+
+	.score {
+		display: none;
+		top: 1rem;
+		right: 1rem;
+		padding: 1px 7px 7px;
+		border-radius: 20px;
+		letter-spacing: 2px;
+		box-shadow: 0 0 10px 10px #fff,
+			0 0 20px 10px #fff,
+			0 0 30px 15px #fff;
+		border: none;
+		z-index: 50;
+	}
+	
+	.score-message {
+		font-size: 15px;
+		letter-spacing: 3px;
+	}
+	
+	.score-value {
+		font-size: 15px;
+		letter-spacing: 3px;
+	}
+
+	.high-score-play {
+		font-size: 15px;
+		letter-spacing: 3px;
+	}
+
+	.bird {
+		height: 4vh;
 	}
 
 	.game-over {
@@ -377,5 +433,55 @@ body {
 	
 	.thought {
 		width: 55vmin;
+	}
+
+	.ships {
+		position: absolute;
+		grid-template-rows: auto 15vh auto;
+		height: 85vh;
+		width: 10vh;
+		left: 100%;
+	}
+	
+	.ships>.top {
+		display: flex;
+	}
+	
+	.ships>.bottom {
+		position: relative;
+		bottom: 0;
+		display: flex;
+		justify-content: center;
+		align-items: flex-end;
+	}
+	
+	#ship-up {
+		top: 0;
+		height: 120%;
+		width: 10vh;
+	}
+	
+	#ship-down {
+		bottom: 0;
+		height: 80%;
+		width: 10vh;
+	}
+	
+	#bounds-up {
+		position: absolute;
+		top: 0;
+		left: 50%;
+		transform: translateX(-50%);
+		width: 20%;
+		height: 100%;
+	}
+	
+	#bounds-down {
+		position: absolute;
+		bottom: 0;
+		left: 50%;
+		transform: translateX(-50%);
+		width: 20%;
+		height: 100%;
 	}
 }

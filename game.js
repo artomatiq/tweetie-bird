@@ -3,11 +3,14 @@ window.onload = () => {
     document.body.style.visibility = 'visible';
 };
 //mobile configs
-const isMobile = () => {
-    return /Mobi|Android/i.test(navigator.userAgent);
-};
+function isMobile() {
+    const userAgent = navigator.userAgent || window.opera;
+    const mobileRegex = /android|webos|iphone|ipad|ipod/i;
+    const desktopRegex = /windows|macintosh|mac os x|linux|x11|cros/i;
+    return mobileRegex.test(userAgent) && !desktopRegex.test(userAgent);
+}
 
-if (isMobile) {
+if (isMobile()) {
     const startMessageH3 = document.querySelector('.start-message h3');
     startMessageH3.textContent = 'Tap to Start';
 
@@ -82,7 +85,7 @@ if (!localStorage.getItem('highScore')) {
     localStorage.setItem('highScore', '0')
 }
 
-if (isMobile) {
+if (isMobile()) {
     //listen for tap
     document.addEventListener('touchstart', handleTap);
 }
@@ -114,6 +117,7 @@ function handleEnter(e) {
 
 function handleTap() {
     if (mode === gameStates.start) {
+        console.log('getting ready');
         getReady();
     }
     if (mode === gameStates.play) {
@@ -241,15 +245,21 @@ function generateRandomShip() {
 
     if (mode !== gameStates.play) return;
 
-    const gaps = [
-        { up: '100%', down: '100%' },
-        { up: '100%', down: '50vh' },
-        { up: '50vh', down: '100%' }
-    ]
+
+
+    // const gaps = [
+    //     { up: '100%', down: '100%' },
+    //     { up: '100%', down: '50vh' },
+    //     { up: '50vh', down: '100%' }
+    // ]
+    const differences = [0, 30, 30, 30, 40, 20, 20]
     let clone = ship.cloneNode(true);
-    let gap = gaps[Math.floor(Math.random() * gaps.length)];
-    clone.querySelector('#ship-up').style.height = gap.up;
-    clone.querySelector('#ship-down').style.height = gap.down;
+    // let gap = gaps[Math.floor(Math.random() * gaps.length)]; //choose random height pair from array
+    const gap = differences[Math.floor(Math.random() * differences.length)];
+    clone.querySelector('#ship-up').style.height = `${100-gap}%`;
+    clone.querySelector(`#bounds-up`).style.height = `${100-gap}%`;
+    clone.querySelector('#ship-down').style.height = `${100+gap}%`;
+    clone.querySelector(`#bounds-down`).style.height = `${100+gap}%`;
     clone.style.left = '100%';
 
     return clone;
