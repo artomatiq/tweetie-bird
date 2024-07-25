@@ -136,6 +136,7 @@ function handleTap() {
     }
     if (mode === gameStates.ready) {
         startGame();
+        jump();
         return
     }
 }
