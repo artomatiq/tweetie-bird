@@ -152,8 +152,6 @@ function handleSpace(e) {
     }
 }
 
-
-
 function generateShipsInterval() {
     loops.generateShipsInterval = setInterval(() => {
         const randomShip = generateRandomShip();
@@ -249,27 +247,25 @@ function runShips() {
     clearShipsInterval();
 }
 
+let firstPlay = true;
+
 function generateRandomShip() {
 
     if (mode !== gameStates.play) return;
 
-
-
-    // const gaps = [
-    //     { up: '100%', down: '100%' },
-    //     { up: '100%', down: '50vh' },
-    //     { up: '50vh', down: '100%' }
-    // ]
     const differences = [0, 30, 30, 30, 40, 20, 20]
     let clone = ship.cloneNode(true);
-    // let gap = gaps[Math.floor(Math.random() * gaps.length)]; //choose random height pair from array
-    const gap = differences[Math.floor(Math.random() * differences.length)];
+    let gap = differences[Math.floor(Math.random() * differences.length)];
+    if (firstPlay) {
+        gap = 0;
+    }
     clone.querySelector('#ship-up').style.height = `${100-gap}%`;
     clone.querySelector(`#bounds-up`).style.height = `${100-gap}%`;
     clone.querySelector('#ship-down').style.height = `${100+gap}%`;
     clone.querySelector(`#bounds-down`).style.height = `${100+gap}%`;
     clone.style.left = '100%';
 
+    firstPlay = false;
     return clone;
 }
 
