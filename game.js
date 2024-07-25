@@ -5,9 +5,9 @@ window.onload = () => {
 //mobile configs
 function isMobile() {
     const userAgent = navigator.userAgent || window.opera;
-    const mobileRegex = /android|webos|iphone|ipad|ipod/i;
-    const desktopRegex = /windows|macintosh|mac os x|linux|x11|cros/i;
-    return mobileRegex.test(userAgent) && !desktopRegex.test(userAgent);
+
+    return /android|webos|iphone|ipad|ipod/i.test(userAgent)
+        && !/windows|macintosh|linux|x11|cros/i.test(userAgent);
 }
 
 if (isMobile()) {
