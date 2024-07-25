@@ -122,17 +122,21 @@ function handleTap() {
     if (mode === gameStates.start) {
         console.log('getting ready');
         getReady();
+        return
     }
     if (mode === gameStates.play) {
         jump();
+        return
     }
     if (laughingElon.style.display === 'block') return
 
     if (mode === gameStates.crash) {
         getReady();
+        return
     }
     if (mode === gameStates.ready) {
         startGame();
+        return
     }
 }
 
