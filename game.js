@@ -217,7 +217,7 @@ function startGravity() {
 
     // loops.gravityAnimation = requestAnimationFrame(gravity);
 
-    const desiredFPS = 80;
+    const desiredFPS = 120;
     const interval = 1000 / desiredFPS; // milliseconds per frame
     let lastTime = 0;
 
@@ -261,7 +261,7 @@ function runShips() {
 
 
 
-    
+
     // function slideShipsAnimation() {
     //     document.querySelectorAll('.ships').forEach(ship => {
     //         ship.style.left = `${parseInt(getComputedStyle(ship).left) - 3}px`;
@@ -276,7 +276,7 @@ function runShips() {
 
 
 
-    const desiredFPS = 80;
+    const desiredFPS = 120;
     const interval = 1000 / desiredFPS; // milliseconds per frame
     let lastTime = 0;
 
