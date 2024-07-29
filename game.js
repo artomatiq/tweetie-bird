@@ -207,16 +207,37 @@ function trackScoreInterval() {
 }
 
 function startGravity() {
-    function gravity() {
-        velocity += gravityConstant;
-        let position = parseInt(getComputedStyle(bird).top) + velocity;
-        bird.style.top = `${position}px`;
+    // function gravity() {
+    //     velocity += gravityConstant;
+    //     let position = parseInt(getComputedStyle(bird).top) + velocity;
+    //     bird.style.top = `${position}px`;
+
+    //     loops.gravityAnimation = requestAnimationFrame(gravity);
+    // }
+
+    // loops.gravityAnimation = requestAnimationFrame(gravity);
+
+    const desiredFPS = 120;
+    const interval = 1000 / desiredFPS; // milliseconds per frame
+    let lastTime = 0;
+
+    function gravity(currentTime) {
+        if (currentTime - lastTime >= interval) {
+            lastTime = currentTime;
+
+            // Gravity logic
+            velocity += gravityConstant;
+            let position = parseInt(getComputedStyle(bird).top) + velocity;
+            bird.style.top = `${position}px`;
+        }
 
         loops.gravityAnimation = requestAnimationFrame(gravity);
     }
 
     loops.gravityAnimation = requestAnimationFrame(gravity);
 }
+
+
 
 function jump() {
     const x = 32;
