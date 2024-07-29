@@ -217,7 +217,7 @@ function startGravity() {
 
     // loops.gravityAnimation = requestAnimationFrame(gravity);
 
-    const desiredFPS = 240;
+    const desiredFPS = 500;
     const interval = 1000 / desiredFPS; // milliseconds per frame
     let lastTime = 0;
 
