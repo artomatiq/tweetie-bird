@@ -255,17 +255,54 @@ function runShips() {
     //create random ship every 5 seconds
     generateShipsInterval();
 
-    function slideShipsAnimation() {
-        document.querySelectorAll('.ships').forEach(ship => {
-            ship.style.left = `${parseInt(getComputedStyle(ship).left) - 3}px`;
-        });
+
+
+
+
+
+
+    
+    // function slideShipsAnimation() {
+    //     document.querySelectorAll('.ships').forEach(ship => {
+    //         ship.style.left = `${parseInt(getComputedStyle(ship).left) - 3}px`;
+    //     });
+    //     loops.slideShipsAnimation = requestAnimationFrame(slideShipsAnimation);
+    // }
+    // //run all ships across the screen
+    // loops.slideShipsAnimation = requestAnimationFrame(slideShipsAnimation);
+
+
+
+
+
+
+    const desiredFPS = 80;
+    const interval = 1000 / desiredFPS; // milliseconds per frame
+    let lastTime = 0;
+
+    function slideShipsAnimation(currentTime) {
+        if (currentTime - lastTime >= interval) {
+            lastTime = currentTime;
+
+            document.querySelectorAll('.ships').forEach(ship => {
+                ship.style.left = `${parseInt(getComputedStyle(ship).left) - 3}px`;
+            });
+        }
         loops.slideShipsAnimation = requestAnimationFrame(slideShipsAnimation);
     }
     //run all ships across the screen
     loops.slideShipsAnimation = requestAnimationFrame(slideShipsAnimation);
 
+
+
+
+
+
     //clear ships that are out of the screen every 10 seconds
     clearShipsInterval();
+
+
+    
 }
 
 let firstPlay = true;
@@ -280,10 +317,10 @@ function generateRandomShip() {
     if (firstPlay) {
         gap = 0;
     }
-    clone.querySelector('#ship-up').style.height = `${100-gap}%`;
-    clone.querySelector(`#bounds-up`).style.height = `${100-gap}%`;
-    clone.querySelector('#ship-down').style.height = `${100+gap}%`;
-    clone.querySelector(`#bounds-down`).style.height = `${100+gap}%`;
+    clone.querySelector('#ship-up').style.height = `${100 - gap}%`;
+    clone.querySelector(`#bounds-up`).style.height = `${100 - gap}%`;
+    clone.querySelector('#ship-down').style.height = `${100 + gap}%`;
+    clone.querySelector(`#bounds-down`).style.height = `${100 + gap}%`;
     clone.style.left = '100%';
 
     firstPlay = false;
