@@ -191,7 +191,7 @@ function trackScoreInterval() {
     loops.trackScoreInterval = setInterval(() => {
         if (mode === gameStates.play) {
             document.querySelectorAll('.ships').forEach(ship => {
-                if (parseInt(getComputedStyle(ship).left) < parseInt(getComputedStyle(bird).left) && !ship.isScored) {
+                if (parseFloat(getComputedStyle(ship).left) < parseFloat(getComputedStyle(bird).left) && !ship.isScored) {
                     score++;
                     if (JSON.parse(localStorage.getItem('highScore')) < score) {
                         highScorePlay.textContent = `High: ${score}`;
@@ -211,19 +211,6 @@ function trackScoreInterval() {
 
 function startGravity() {
 
-    // function gravity() {
-    //     velocity += gravityConstant;
-    //     let position = parseInt(getComputedStyle(bird).top) + velocity;
-    //     bird.style.top = `${position}px`;
-
-    //     loops.gravityAnimation = requestAnimationFrame(gravity);
-    // }
-
-    // loops.gravityAnimation = requestAnimationFrame(gravity);
-
-
-
-
     let previousTime = null;
 
     function gravity(currentTime) {
@@ -237,11 +224,9 @@ function startGravity() {
 
         previousTime = currentTime;
         loops.gravityAnimation = requestAnimationFrame(gravity);
-        
     }
 
     loops.gravityAnimation = requestAnimationFrame(gravity);
-
 }
 
 
@@ -262,27 +247,6 @@ function runShips() {
     //create random ship every 5 seconds
     generateShipsInterval();
 
-
-
-
-
-
-
-
-    // function slideShipsAnimation() {
-    //     document.querySelectorAll('.ships').forEach(ship => {
-    //         ship.style.left = `${parseInt(getComputedStyle(ship).left) - 3}px`;
-    //     });
-    //     loops.slideShipsAnimation = requestAnimationFrame(slideShipsAnimation);
-    // }
-    // //run all ships across the screen
-    // loops.slideShipsAnimation = requestAnimationFrame(slideShipsAnimation);
-
-
-
-
-
-
     let previousTime = null;
 
     function slideShipsAnimation(currentTime) {
@@ -290,23 +254,17 @@ function runShips() {
             previousTime = currentTime;
         }
         let dt = (currentTime - previousTime) / 1000;
-        // if (currentTime - previousTime > 100000) {
-            document.querySelectorAll('.ships').forEach(ship => {
-                ship.style.left = `${(parseFloat(getComputedStyle(ship).left) - 1 * dt * 120)}px`;
-            });
-        // }
+        document.querySelectorAll('.ships').forEach(ship => {
+            ship.style.left = `${(parseFloat(getComputedStyle(ship).left) - 1 * dt * 120)}px`;
+        });
 
         previousTime = currentTime;
         loops.slideShipsAnimation = requestAnimationFrame(slideShipsAnimation);
     }
     loops.slideShipsAnimation = requestAnimationFrame(slideShipsAnimation);
 
-
-
     //clear ships that are out of the screen every 10 seconds
     clearShipsInterval();
-
-
 }
 
 let firstPlay = true;
@@ -337,7 +295,7 @@ function clearShipsInterval() {
 
     loops.clearShipsInterval = setInterval(() => {
         document.querySelectorAll('.ships').forEach(ship => {
-            if (parseInt(getComputedStyle(ship).left) < -100) {
+            if (parseFloat(getComputedStyle(ship).left) < -100) {
                 ship.remove();
             }
         })
