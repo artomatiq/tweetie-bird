@@ -185,6 +185,7 @@ function listenForCrashInterval() {
 }
 
 function trackScoreInterval() {
+    highScorePlay.textContent = `High: ${localStorage.getItem('highScore')}`
     loops.trackScoreInterval = setInterval(() => {
         if (mode === gameStates.play) {
             document.querySelectorAll('.ships').forEach(ship => {
@@ -221,41 +222,18 @@ function startGravity() {
 
 
 
+    let previousTime = null;
 
-
-    // const desiredFPS = 119;
-    // const interval = 1000 / desiredFPS; // milliseconds per frame
-    // let lastTime = 0;
-
-    // function gravity(currentTime) {
-    //     if (currentTime - lastTime >= interval) {
-    //         lastTime = currentTime;
-
-    //         // Gravity logic
-    //         velocity += gravityConstant;
-    //         let position = parseInt(getComputedStyle(bird).top) + velocity;
-    //         bird.style.top = `${position}px`;
-    //     }
-
-    //     loops.gravityAnimation = requestAnimationFrame(gravity);
-    // }
-
-    // loops.gravityAnimation = requestAnimationFrame(gravity);
-
-
-
-    let previousTime = performance.now();
-
-    function gravity() {
-        let currentTime = performance.now();
-        let dt = (currentTime - previousTime) / 1000;
-
-            velocity += gravityConstant * dt * 60;
-            let position = parseInt(getComputedStyle(bird).top) + velocity * dt * 60;
-            bird.style.top = `${position}px`;
-
+    function gravity(currentTime) {
+        if (!previousTime) {
             previousTime = currentTime;
+        }
+        let dt = (currentTime - previousTime) / 1000;
+        velocity += gravityConstant * dt * 60;
+        let position = parseInt(getComputedStyle(bird).top) + velocity * dt * 60;
+        bird.style.top = `${position}px`;
 
+        previousTime = currentTime;
         loops.gravityAnimation = requestAnimationFrame(gravity);
         
     }
@@ -303,49 +281,28 @@ function runShips() {
 
 
 
-    // const desiredFPS = 240;
-    // const interval = 1000 / desiredFPS; // milliseconds per frame
-    // let lastTime = 0;
+    let previousTime = null;
 
-    // function slideShipsAnimation(currentTime) {
-    //     if (currentTime - lastTime >= interval) {
-    //         lastTime = currentTime;
-
-    //         document.querySelectorAll('.ships').forEach(ship => {
-    //             ship.style.left = `${parseInt(getComputedStyle(ship).left) - 1}px`;
-    //         });
-    //     }
-    //     loops.slideShipsAnimation = requestAnimationFrame(slideShipsAnimation);
-    // }
-    // //run all ships across the screen
-    // loops.slideShipsAnimation = requestAnimationFrame(slideShipsAnimation);
-
-
-
-
-    let previousTime = performance.now();
-
-
-    function slideShipsAnimation() {
-        let currentTime = performance.now();
+    function slideShipsAnimation(currentTime) {
+        if (!previousTime) {
+            previousTime = currentTime;
+        }
         let dt = (currentTime - previousTime) / 1000;
-        document.querySelectorAll('.ships').forEach(ship => {
-            ship.style.left = `${(parseInt(getComputedStyle(ship).left) - 3 * dt * 60)}px`;
-        });
+        // if (currentTime - previousTime > 100000) {
+            document.querySelectorAll('.ships').forEach(ship => {
+                ship.style.left = `${(parseInt(getComputedStyle(ship).left) - 1 * dt * 120)}px`;
+            });
+        // }
+
         previousTime = currentTime;
         loops.slideShipsAnimation = requestAnimationFrame(slideShipsAnimation);
     }
-    //run all ships across the screen
     loops.slideShipsAnimation = requestAnimationFrame(slideShipsAnimation);
-
-
-
 
 
 
     //clear ships that are out of the screen every 10 seconds
     clearShipsInterval();
-
 
 
 }
