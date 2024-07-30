@@ -1,9 +1,8 @@
 //loading
 window.onload = () => {
     document.body.style.visibility = 'visible';
-    if(localStorage.getItem('highscore')) {
-        localStorage.setItem('highScore', '0')
-    }
+    localStorage.setItem('highScore', '0')
+
 };
 //mobile configs
 function isMobile() {
