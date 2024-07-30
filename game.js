@@ -232,7 +232,7 @@ function startGravity() {
         }
         let dt = (currentTime - previousTime) / 1000;
         velocity += gravityConstant * dt * 60;
-        let position = parseInt(getComputedStyle(bird).top) + velocity * dt * 60;
+        let position = parseFloat(getComputedStyle(bird).top) + velocity * dt * 60;
         bird.style.top = `${position}px`;
 
         previousTime = currentTime;
@@ -292,7 +292,7 @@ function runShips() {
         let dt = (currentTime - previousTime) / 1000;
         // if (currentTime - previousTime > 100000) {
             document.querySelectorAll('.ships').forEach(ship => {
-                ship.style.left = `${(parseInt(getComputedStyle(ship).left) - 1 * dt * 120)}px`;
+                ship.style.left = `${(parseFloat(getComputedStyle(ship).left) - 1 * dt * 120)}px`;
             });
         // }
 
