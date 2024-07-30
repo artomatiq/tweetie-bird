@@ -1,7 +1,9 @@
 //loading
 window.onload = () => {
     document.body.style.visibility = 'visible';
-    localStorage.clear();
+    if(localStorage.getItem('highscore')) {
+        localStorage.setItem('highScore', '0')
+    }
 };
 //mobile configs
 function isMobile() {
