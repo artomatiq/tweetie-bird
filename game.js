@@ -1,6 +1,7 @@
 //loading
 window.onload = () => {
     document.body.style.visibility = 'visible';
+    localStorage.clear();
 };
 //mobile configs
 function isMobile() {
