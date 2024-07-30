@@ -255,7 +255,7 @@ function runShips() {
         }
         let dt = (currentTime - previousTime) / 1000;
         document.querySelectorAll('.ships').forEach(ship => {
-            ship.style.left = `${(parseFloat(getComputedStyle(ship).left) - 1 * dt * 120)}px`;
+            ship.style.left = `${(parseFloat(getComputedStyle(ship).left) - 3 * dt * 60)}px`;
         });
 
         previousTime = currentTime;
