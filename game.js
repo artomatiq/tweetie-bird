@@ -82,9 +82,6 @@ let score = 0;
 let surpriseCounter = 0
 let mode = gameStates.start;
 
-// laughingElon.style.display = 'block'
-// thoughtImg.style.display = 'block'
-
 //use local storage to track high score
 if (!localStorage.getItem('highScore')) {
     localStorage.setItem('highScore', '0')
