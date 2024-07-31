@@ -105,38 +105,46 @@ window.addEventListener('beforeunload', function () {
 
 function handleEnter(e) {
     if (e.key === 'Enter') {
-        if (mode === gameStates.play) return
+        
         if (laughingElon.style.display === 'block') return
 
-        if (mode === gameStates.start) {
-            getReady();
-        }
-        if (mode === gameStates.crash) {
-            getReady();
+        switch (mode) {
+            case gameStates.start:
+                getReady();
+                break;
+            case gameStates.play:
+                return;
+            case gameStates.crash:
+                getReady();
+                break;
+            default:
+                console.log('Unexpected game state:', mode);
+                break;
         }
     }
 }
 
 function handleTap() {
-    if (mode === gameStates.start) {
-        console.log('getting ready');
-        getReady();
-        return
-    }
-    if (mode === gameStates.play) {
-        jump();
-        return
-    }
-    if (laughingElon.style.display === 'block') return
 
-    if (mode === gameStates.crash) {
-        getReady();
-        return
-    }
-    if (mode === gameStates.ready) {
-        startGame();
-        jump();
-        return
+    if (laughingElon.style.display === 'block') return;
+
+    switch (mode) {
+        case gameStates.start:
+            getReady();
+            break;
+        case gameStates.ready:
+            startGame();
+            jump();
+            break;
+        case gameStates.play:
+            jump();
+            break;
+        case gameStates.crash:
+            getReady();
+            break;
+        default:
+            console.log('Unexpected game state:', mode);
+            break;
     }
 }
 
@@ -253,6 +261,16 @@ function runShips() {
         let dt = (currentTime - previousTime) / 1000;
         document.querySelectorAll('.ships').forEach(ship => {
             ship.style.left = `${(parseFloat(getComputedStyle(ship).left) - 3 * dt * 60)}px`;
+            // let transform = getComputedStyle(ship).transform;
+            // let translateX = 0
+
+            // if (transform !== 'none') {
+            //     let matrix = new DOMMatrix(transform);
+            //     translateX = matrix.m41;
+            // }
+
+            // let newTranslateX = translateX - 3 * dt * 60;
+            // ship.style.transform = `translateX(${newTranslateX}px)`;
         });
 
         previousTime = currentTime;
