@@ -89,19 +89,16 @@ if (!localStorage.getItem('highScore')) {
 
 if (isMobile()) {
     //listen for tap
-    document.addEventListener('touchstart', handleTap);
+    // document.addEventListener('touchstart', handleTap);
+    document.addEventListener('touchstart', (event) => {
+        event.preventDefault(); // Prevent default behavior
+        handleTap();
+    }, { passive: false });
 }
 else {
     //listen for enter button
     document.addEventListener('keydown', handleEnter);
 }
-
-
-//clear local storage on reload
-window.addEventListener('beforeunload', function () {
-    localStorage.clear();
-});
-
 
 function handleEnter(e) {
     if (e.key === 'Enter') {
@@ -124,7 +121,32 @@ function handleEnter(e) {
     }
 }
 
+// function handleTap() {
+
+//     if (mode === gameStates.start) {
+//         getReady();
+//         return
+//     }
+//     if (mode === gameStates.play) {
+//         jump();
+//         return
+//     }
+//     if (laughingElon.style.display === 'block') return
+
+//     if (mode === gameStates.crash) {
+//         getReady();
+//         return
+//     }
+//     if (mode === gameStates.ready) {
+//         startGame();
+//         jump();
+//         return
+//     }
+// }
+
 function handleTap() {
+
+    console.log('tap detected');
 
     if (laughingElon.style.display === 'block') return;
 
@@ -167,76 +189,75 @@ function generateShipsInterval() {
 }
 
 function listenForCrashInterval() {
-    loops.listenForCrashInterval = setInterval(() => {
-        if (mode === gameStates.play) {
-            const birdBox = bird.getBoundingClientRect();
-            document.querySelectorAll('.boundary-up, .boundary-down').forEach(ship => {
-                const shipBox = ship.getBoundingClientRect();
-                if (
-                    //bird crashes with ship
-                    (shipBox.left < birdBox.right &&
-                        shipBox.right > birdBox.left &&
-                        shipBox.top < birdBox.bottom &&
-                        shipBox.bottom > birdBox.top)
-                    ||
-                    //bird crashes with window
-                    birdBox.top < 0 || birdBox.bottom > window.innerHeight
-                ) {
+    // loops.listenForCrashInterval = setInterval(() => {
+    //     if (mode === gameStates.play) {
+    //         const birdBox = bird.getBoundingClientRect();
+    //         document.querySelectorAll('.boundary-up, .boundary-down').forEach(ship => {
+    //             const shipBox = ship.getBoundingClientRect();
+    //             if (
+    //                 //bird crashes with ship
+    //                 (shipBox.left < birdBox.right &&
+    //                     shipBox.right > birdBox.left &&
+    //                     shipBox.top < birdBox.bottom &&
+    //                     shipBox.bottom > birdBox.top)
+    //                 ||
+    //                 //bird crashes with window
+    //                 birdBox.top < 0 || birdBox.bottom > window.innerHeight
+    //             ) {
 
-                    runLaughingElon();
-                    endGame();
-                }
-            })
-        }
-    }, 10)
+    //                 runLaughingElon();
+    //                 endGame();
+    //             }
+    //         })
+    //     }
+    // }, 10)
 }
 
 function trackScoreInterval() {
-    highScorePlay.textContent = `High: ${localStorage.getItem('highScore')}`
-    loops.trackScoreInterval = setInterval(() => {
-        if (mode === gameStates.play) {
-            document.querySelectorAll('.ships').forEach(ship => {
-                if (parseFloat(getComputedStyle(ship).left) < parseFloat(getComputedStyle(bird).left) && !ship.isScored) {
-                    score++;
-                    if (JSON.parse(localStorage.getItem('highScore')) < score) {
-                        highScorePlay.textContent = `High: ${score}`;
-                        localStorage.setItem('highScore', `${score}`)
-                    }
-                    if (JSON.parse(localStorage.getItem('highScore')) >= 2 + surpriseCounter * 3) {
-                        runSurprisedElon();
-                    }
-                    scoreValue.textContent = score;
-                    ship.isScored = true;
-                }
-            }
-            )
-        }
-    }, 100)
+    // highScorePlay.textContent = `High: ${localStorage.getItem('highScore')}`
+    // loops.trackScoreInterval = setInterval(() => {
+    //     if (mode === gameStates.play) {
+    //         document.querySelectorAll('.ships').forEach(ship => {
+    //             if (parseFloat(getComputedStyle(ship).left) < parseFloat(getComputedStyle(bird).left) && !ship.isScored) {
+    //                 score++;
+    //                 if (JSON.parse(localStorage.getItem('highScore')) < score) {
+    //                     highScorePlay.textContent = `High: ${score}`;
+    //                     localStorage.setItem('highScore', `${score}`)
+    //                 }
+    //                 if (JSON.parse(localStorage.getItem('highScore')) >= 2 + surpriseCounter * 3) {
+    //                     runSurprisedElon();
+    //                 }
+    //                 scoreValue.textContent = score;
+    //                 ship.isScored = true;
+    //             }
+    //         }
+    //         )
+    //     }
+    // }, 100)
 }
 
 function startGravity() {
 
-    let previousTime = null;
+    // let previousTime = null;
 
-    function gravity(currentTime) {
-        if (!previousTime) {
-            previousTime = currentTime;
-        }
-        let dt = (currentTime - previousTime) / 1000;
-        velocity += gravityConstant * dt * 60;
-        let position = parseFloat(getComputedStyle(bird).top) + velocity * dt * 60;
-        bird.style.top = `${position}px`;
+    // function gravity(currentTime) {
+    //     if (!previousTime) {
+    //         previousTime = currentTime;
+    //     }
+    //     let dt = (currentTime - previousTime) / 1000;
+    //     velocity += gravityConstant * dt * 60;
+    //     let position = parseFloat(getComputedStyle(bird).top) + velocity * dt * 60;
+    //     // bird.style.top = `${position}px`;
 
-        previousTime = currentTime;
-        loops.gravityAnimation = requestAnimationFrame(gravity);
-    }
+    //     previousTime = currentTime;
+    //     loops.gravityAnimation = requestAnimationFrame(gravity);
+    // }
 
-    loops.gravityAnimation = requestAnimationFrame(gravity);
+    // loops.gravityAnimation = requestAnimationFrame(gravity);
 }
 
-
-
 function jump() {
+
     const x = 32;
 
     birdFrames.forEach((frame, index) => {
