@@ -89,7 +89,10 @@ if (!localStorage.getItem('highScore')) {
 
 if (isMobile()) {
     //listen for tap
-    document.addEventListener('touchstart', handleTap);
+    document.addEventListener('touchstart', (evt) => {
+        // evt.preventDefault();
+        handleTap();
+    }, { passive: true });
 }
 else {
     //listen for enter button
@@ -117,7 +120,8 @@ function handleEnter(e) {
     }
 }
 
-function handleTap() {
+function handleTap(evt) {
+
     if (mode === gameStates.start) {
         console.log('getting ready');
         getReady();
