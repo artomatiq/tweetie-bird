@@ -225,8 +225,6 @@ function startGravity() {
     loops.gravityAnimation = requestAnimationFrame(gravity);
 }
 
-
-
 function jump() {
     const x = 32;
 
