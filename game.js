@@ -296,17 +296,13 @@ function generateRandomShip() {
     const differences = [0, 30, 30, 30, 40, 20, 20]
     let clone = ship.cloneNode(true);
     let gap = differences[Math.floor(Math.random() * differences.length)];
-    if (firstPlay) {
-        gap = 0;
-    }
+
     clone.querySelector('#ship-up').style.height = `${100 - gap}%`;
     clone.querySelector(`#bounds-up`).style.height = `${100 - gap}%`;
     clone.querySelector('#ship-down').style.height = `${100 + gap}%`;
     clone.querySelector(`#bounds-down`).style.height = `${100 + gap}%`;
     clone.style.opacity = '1';
-    // clone.style.left = '100vw';
 
-    firstPlay = false;
     return clone;
 }
 
