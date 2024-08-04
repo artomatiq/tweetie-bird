@@ -155,13 +155,6 @@ function handleSpace(e) {
     }
 }
 
-function generateShipsInterval() {
-    loops.generateShipsInterval = setInterval(() => {
-        const randomShip = generateRandomShip();
-        document.querySelector('.background').appendChild(randomShip);
-    }, 2500);
-}
-
 function listenForCrashInterval() {
     // loops.listenForCrashInterval = setInterval(() => {
     //     if (mode === gameStates.play) {
@@ -242,6 +235,13 @@ function jump() {
     // });
 
     // velocity = -9.5;
+}
+
+function generateShipsInterval() {
+    loops.generateShipsInterval = setInterval(() => {
+        const randomShip = generateRandomShip();
+        document.querySelector('.background').appendChild(randomShip);
+    }, 2500);
 }
 
 function runShips() {
