@@ -143,11 +143,9 @@ body {
 	height: 100vh;
 	width: 12vh;
 	left: 100vw;
-	/* transition: all 7s linear; */
 	will-change: transform;
 }
 .ships.animate {
-	/* transition: all calc(7s * 1vw) linear; */
 	transform: translateX(-120vw);
 }
 
