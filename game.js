@@ -294,7 +294,6 @@ function generateRandomShip() {
     if (mode !== gameStates.play) return;
 
     const differences = [0, 30, 30, 30, 40, 20, 20]
-    console.log('cloning', ship.getBoundingClientRect());
     let clone = ship.cloneNode(true);
     let gap = differences[Math.floor(Math.random() * differences.length)];
     if (firstPlay) {
@@ -317,7 +316,8 @@ function clearShipsInterval() {
 
     loops.clearShipsInterval = setInterval(() => {
         document.querySelectorAll('.ships').forEach(ship => {
-            if (parseFloat(getComputedStyle(ship).left) < -100) {
+            const shipRight = ship.getBoundingClientRect().right;
+            if (shipRight < 0) {
                 console.log('clearing ship');
                 ship.remove();
             }
