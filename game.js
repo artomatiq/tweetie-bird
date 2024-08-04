@@ -185,7 +185,9 @@ function trackScoreInterval() {
     loops.trackScoreInterval = setInterval(() => {
         if (mode === gameStates.play) {
             document.querySelectorAll('.ships').forEach(ship => {
-                if (parseFloat(getComputedStyle(ship).left) < parseFloat(getComputedStyle(bird).left) && !ship.isScored) {
+                const shipLeft = ship.getBoundingClientRect().left
+                const birdLeft = bird.getBoundingClientRect().left
+                if (shipLeft < birdLeft && !ship.isScored) {
                     score++;
                     if (JSON.parse(localStorage.getItem('highScore')) < score) {
                         highScorePlay.textContent = `High: ${score}`;
@@ -241,6 +243,9 @@ function generateShipsInterval() {
     loops.generateShipsInterval = setInterval(() => {
         const randomShip = generateRandomShip();
         document.querySelector('.background').appendChild(randomShip);
+        setTimeout(() => {
+            randomShip.classList.add('animate')
+        }, 100);
         // animateNewShip(randomShip);
     }, 2500);
 
@@ -262,21 +267,21 @@ function runShips() {
     //create random ship every 5 seconds
     generateShipsInterval();
 
-    let previousTime = null;
+    // let previousTime = null;
 
-    function slideShipsAnimation(currentTime) {
-        if (!previousTime) {
-            previousTime = currentTime;
-        }
-        let dt = (currentTime - previousTime) / 1000;
-        document.querySelectorAll('.ships').forEach(ship => {
-            ship.style.left = `${(parseFloat(getComputedStyle(ship).left) - 3 * dt * 50)}px`;
-        });
+    // function slideShipsAnimation(currentTime) {
+    //     if (!previousTime) {
+    //         previousTime = currentTime;
+    //     }
+    //     let dt = (currentTime - previousTime) / 1000;
+    //     document.querySelectorAll('.ships').forEach(ship => {
+    //         ship.style.left = `${(parseFloat(getComputedStyle(ship).left) - 3 * dt * 50)}px`;
+    //     });
 
-        previousTime = currentTime;
-        loops.slideShipsAnimation = requestAnimationFrame(slideShipsAnimation);
-    }
-    loops.slideShipsAnimation = requestAnimationFrame(slideShipsAnimation);
+    //     previousTime = currentTime;
+    //     loops.slideShipsAnimation = requestAnimationFrame(slideShipsAnimation);
+    // }
+    // loops.slideShipsAnimation = requestAnimationFrame(slideShipsAnimation);
 
     //clear ships that are out of the screen every 10 seconds
     clearShipsInterval();
@@ -289,6 +294,7 @@ function generateRandomShip() {
     if (mode !== gameStates.play) return;
 
     const differences = [0, 30, 30, 30, 40, 20, 20]
+    console.log('cloning', ship.getBoundingClientRect());
     let clone = ship.cloneNode(true);
     let gap = differences[Math.floor(Math.random() * differences.length)];
     if (firstPlay) {
@@ -298,7 +304,8 @@ function generateRandomShip() {
     clone.querySelector(`#bounds-up`).style.height = `${100 - gap}%`;
     clone.querySelector('#ship-down').style.height = `${100 + gap}%`;
     clone.querySelector(`#bounds-down`).style.height = `${100 + gap}%`;
-    clone.style.left = '100vw';
+    clone.style.opacity = '1';
+    // clone.style.left = '100vw';
 
     firstPlay = false;
     return clone;
@@ -311,6 +318,7 @@ function clearShipsInterval() {
     loops.clearShipsInterval = setInterval(() => {
         document.querySelectorAll('.ships').forEach(ship => {
             if (parseFloat(getComputedStyle(ship).left) < -100) {
+                console.log('clearing ship');
                 ship.remove();
             }
         })
