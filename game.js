@@ -285,8 +285,6 @@ function runShips() {
     clearShipsInterval();
 }
 
-let firstPlay = true;
-
 function generateRandomShip() {
 
     if (mode !== gameStates.play) return;
@@ -300,6 +298,7 @@ function generateRandomShip() {
     clone.querySelector('#ship-down').style.height = `${100 + gap}%`;
     clone.querySelector(`#bounds-down`).style.height = `${100 + gap}%`;
     clone.style.opacity = '1';
+    clone.style.transition = `all ${window.innerWidth/175}s linear`
 
     return clone;
 }
